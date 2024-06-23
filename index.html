@@ -4,9 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./style.css">
 </head>
-<body>
+<body class="container body">
+    <header>
+        <h1 class="heading text-uppercase font-14 kimberly-text-color">table heading</h1>
+        <div class="flex-between border-bottom">
+            <nav>
+                <ul class="main-list d-flex">
+                    <li class="sub-list"><button class="base-button active text-capitalize">all</button></li>
+                    <li class="sub-list"><button class="base-button text-capitalize kimberly-text-color">paid</button></li>
+                    <li class="sub-list"><button class="base-button text-capitalize kimberly-text-color">unpaid</button></li>
+                    <li class="sub-list"><button class="base-button text-capitalize kimberly-text-color">overdue</button></li>
+                </ul>
+            </nav>
+            <p class="kimberly-text-color font-14">
+                Total payable amount:
+                <strong class="strong font-18">$900.00</strong>
+                <span class="text-uppercase font-18">usd</span>
+            </p>
+        </div>
+    </header>
+
+    <main class="table-border">
+        <div class="flex-between filter-table">
+         <div class="flex-center">
+          <div class="filter">
+           <button class="base-button text-capitalize filter-btn font-16"><i class="fa fa-filter kimberly-text-color font-18"></i>filter</button>
+           <div class="hidden filter-crud">
+                    <form>
+                      <p class="text-uppercase crud-padding font-12 kimberly-text-color">sort by:</p>
+                       <ul class="border-bottom">
+                        <li class="flex-between filter-list crud-padding">
+                            <label for="default" class="text-capitalize font-14">default</label>
+                            <input type="radio" id="default" name="sort" checked="checked">
+                        </li>
+
+                       <li class="flex-between filter-list crud-padding">
+                        <label for="first-name" class="text-capitalize font-14">first name</label>
+                        <input type="radio" id="first-name" name="sort">
+                       </li>
+
+                      <li class="flex-between filter-list crud-padding">
+                       <label for="last-name" class="text-capitalize font-14">last name</label>
+                       <input type="radio" id="last-name" name="sort">
+                      </li>
+
+                      <li class="flex-between filter-list crud-padding">
+                       <label for="due-date" class="text-capitalize font-14">due date</label>
+                       <input type="radio" id="due-date" name="sort">
+                      </li>
+
+                      <li class="flex-between filter-list crud-padding">
+                       <label for="last-login" class="text-capitalize font-14">last login</label>
+                       <input type="radio" id="last-login" name="sort">
+                      </li>
+                    </ul>
+
+                <p class="text-uppercase crud-padding font-12 kimberly-text-color">users:</p>
+                  <ul>
+                    <li class="flex-between filter-list crud-padding">
+                        <label for="all" class="text-capitalize font-14">all</label>
+                        <input type="radio" id="all" name="users" checked="checked">
+                    </li>
+
+                    <li class="flex-between filter-list crud-padding">
+                        <label for="active" class="text-capitalize font-14">active</label>
+                        <input type="radio" id="active" name="users">
+                    </li>
+
+                    <li class="flex-between filter-list crud-padding">
+                        <label for="inactive" class="text-capitalize font-14">inactive</label>
+                        <input type="radio" id="inactive" name="users">
+                    </li>
+                   </ul>
+                 </form>
+           </div>
+           </div>
+
+           <form class="search-bar">
+            <button type="submit" class="base-button"><i class="fa fa-search lavender-purple-color font-18"></i></button>
+            <input type="text" placeholder="Search Users By Name...">
+           </form>
+          </div>
+
+           <button class="base-button pay-dues-bttn text-uppercase font-16">pay dues</button>
+        </div>
+
+        <table class="table-container"></table>
+    </main>
  <script src="./script.js"></script>   
 </body>
 </html>
