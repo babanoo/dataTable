@@ -147,6 +147,9 @@
     width: 224px;
     border-radius: 10px;
     border: 2px solid var(--lavender-gray);
+    position: absolute;
+    z-index: 1;
+    transform: translateY(-20px);
 }
 
 .crud-padding {

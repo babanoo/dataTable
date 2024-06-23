@@ -1,4 +1,6 @@
 const table = document.querySelector(".table-container");
+const filter = document.querySelector(".filter-btn");
+const filterCrud = document.querySelector(".filter-crud");
 
 let users = [
   {
@@ -88,3 +90,7 @@ function renderTable(users) {
     table.appendChild(contentRow);
   });
 }
+
+filter.addEventListener("click", (event) => {
+  filterCrud.classList.toggle("hidden");
+});

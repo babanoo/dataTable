@@ -33,58 +33,7 @@
     <main class="table-border">
         <div class="flex-between filter-table">
          <div class="flex-center">
-          <div class="filter">
            <button class="base-button text-capitalize filter-btn font-16"><i class="fa fa-filter kimberly-text-color font-18"></i>filter</button>
-           <div class="hidden filter-crud">
-                    <form>
-                      <p class="text-uppercase crud-padding font-12 kimberly-text-color">sort by:</p>
-                       <ul class="border-bottom">
-                        <li class="flex-between filter-list crud-padding">
-                            <label for="default" class="text-capitalize font-14">default</label>
-                            <input type="radio" id="default" name="sort" checked="checked">
-                        </li>
-
-                       <li class="flex-between filter-list crud-padding">
-                        <label for="first-name" class="text-capitalize font-14">first name</label>
-                        <input type="radio" id="first-name" name="sort">
-                       </li>
-
-                      <li class="flex-between filter-list crud-padding">
-                       <label for="last-name" class="text-capitalize font-14">last name</label>
-                       <input type="radio" id="last-name" name="sort">
-                      </li>
-
-                      <li class="flex-between filter-list crud-padding">
-                       <label for="due-date" class="text-capitalize font-14">due date</label>
-                       <input type="radio" id="due-date" name="sort">
-                      </li>
-
-                      <li class="flex-between filter-list crud-padding">
-                       <label for="last-login" class="text-capitalize font-14">last login</label>
-                       <input type="radio" id="last-login" name="sort">
-                      </li>
-                    </ul>
-
-                <p class="text-uppercase crud-padding font-12 kimberly-text-color">users:</p>
-                  <ul>
-                    <li class="flex-between filter-list crud-padding">
-                        <label for="all" class="text-capitalize font-14">all</label>
-                        <input type="radio" id="all" name="users" checked="checked">
-                    </li>
-
-                    <li class="flex-between filter-list crud-padding">
-                        <label for="active" class="text-capitalize font-14">active</label>
-                        <input type="radio" id="active" name="users">
-                    </li>
-
-                    <li class="flex-between filter-list crud-padding">
-                        <label for="inactive" class="text-capitalize font-14">inactive</label>
-                        <input type="radio" id="inactive" name="users">
-                    </li>
-                   </ul>
-                 </form>
-           </div>
-           </div>
 
            <form class="search-bar">
             <button type="submit" class="base-button"><i class="fa fa-search lavender-purple-color font-18"></i></button>
@@ -94,6 +43,55 @@
 
            <button class="base-button pay-dues-bttn text-uppercase font-16">pay dues</button>
         </div>
+        <div class="hidden filter-crud">
+            <form>
+              <p class="text-uppercase crud-padding font-12 kimberly-text-color">sort by:</p>
+               <ul class="border-bottom">
+                <li class="flex-between filter-list crud-padding">
+                    <label for="default" class="text-capitalize font-14">default</label>
+                    <input type="radio" id="default" name="sort" checked="checked">
+                </li>
+
+               <li class="flex-between filter-list crud-padding">
+                <label for="first-name" class="text-capitalize font-14">first name</label>
+                <input type="radio" id="first-name" name="sort">
+               </li>
+
+              <li class="flex-between filter-list crud-padding">
+               <label for="last-name" class="text-capitalize font-14">last name</label>
+               <input type="radio" id="last-name" name="sort">
+              </li>
+
+              <li class="flex-between filter-list crud-padding">
+               <label for="due-date" class="text-capitalize font-14">due date</label>
+               <input type="radio" id="due-date" name="sort">
+              </li>
+
+              <li class="flex-between filter-list crud-padding">
+               <label for="last-login" class="text-capitalize font-14">last login</label>
+               <input type="radio" id="last-login" name="sort">
+              </li>
+            </ul>
+
+        <p class="text-uppercase crud-padding font-12 kimberly-text-color">users:</p>
+          <ul>
+            <li class="flex-between filter-list crud-padding">
+                <label for="all" class="text-capitalize font-14">all</label>
+                <input type="radio" id="all" name="users" checked="checked">
+            </li>
+
+            <li class="flex-between filter-list crud-padding">
+                <label for="active" class="text-capitalize font-14">active</label>
+                <input type="radio" id="active" name="users">
+            </li>
+
+            <li class="flex-between filter-list crud-padding">
+                <label for="inactive" class="text-capitalize font-14">inactive</label>
+                <input type="radio" id="inactive" name="users">
+            </li>
+           </ul>
+         </form>
+   </div>
 
         <table class="table-container"></table>
     </main>
