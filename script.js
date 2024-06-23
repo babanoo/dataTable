@@ -80,8 +80,9 @@ function renderTable(users) {
     objValues.forEach((el) => {
       const tableContent = document.createElement("td");
       contentRow.appendChild(tableContent);
-      tableContent.textContent = el;
-      typeof el === "object" ? (tableContent.innerHTML = el.join("<br>")) : el;
+      typeof el === "object"
+        ? (tableContent.innerHTML = el.join("<br>"))
+        : (tableContent.textContent = el);
     });
 
     table.appendChild(contentRow);
