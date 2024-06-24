@@ -1,9 +1,13 @@
 const table = document.querySelector(".table-container");
+const paid = document.querySelector(".paid");
+const unpaid = document.querySelector(".unpaid");
+const overdue = document.querySelector(".overdue");
 const filter = document.querySelector(".filter-btn");
 const filterCrud = document.querySelector(".filter-crud");
-const allUsers = document.querySelector(".all-users");
+const allUsers = document.querySelectorAll(".all-users");
 const activeUsers = document.querySelector(".active-users");
 const inactiveUsers = document.querySelector(".inactive-users");
+const addActiveColor = document.querySelectorAll(".add-active");
 
 let users = [
   {
@@ -106,9 +110,29 @@ function renderTable(users) {
   });
 }
 
-filter.addEventListener("click", (event) => {
-  filterCrud.classList.toggle("hidden");
-});
+function filterePaidUsers(filterType) {
+  let filteredUsers;
+  switch (filterType) {
+    case "paid":
+      filteredUsers = users.filter((user) =>
+        user["payment status"].includes("Paid")
+      );
+      break;
+    case "unpaid":
+      filteredUsers = users.filter((user) =>
+        user["payment status"].includes("Unpaid")
+      );
+      break;
+    case "overdue":
+      filteredUsers = users.filter((user) =>
+        user["payment status"].includes("Overdue")
+      );
+      break;
+    default:
+      filteredUsers = users;
+  }
+  renderTable(filteredUsers);
+}
 
 function filtereActivedUsers(filterType) {
   let filteredUsers;
@@ -129,6 +153,28 @@ function filtereActivedUsers(filterType) {
   renderTable(filteredUsers);
 }
 
+function addActiveClass() {
+  for (let activeBttn of addActiveColor) {
+    activeBttn.classList.remove("active");
+    this.classList.add("active");
+  }
+}
+
+filter.addEventListener("click", (event) => {
+  filterCrud.classList.toggle("hidden");
+});
+
+for (let user of allUsers) {
+  user.addEventListener("click", filtereActivedUsers);
+}
+
+for (let active of addActiveColor) {
+  active.addEventListener("click", addActiveClass);
+}
+
+paid.addEventListener("click", () => filterePaidUsers("paid"));
+unpaid.addEventListener("click", () => filterePaidUsers("unpaid"));
+overdue.addEventListener("click", () => filterePaidUsers("overdue"));
+
 activeUsers.addEventListener("click", () => filtereActivedUsers("active"));
 inactiveUsers.addEventListener("click", () => filtereActivedUsers("inactive"));
-allUsers.addEventListener("click", filtereActivedUsers);
