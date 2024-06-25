@@ -117,12 +117,14 @@
     content: "";
     position: absolute;
     border-bottom: 3px solid var(--bleu);
-    width: 50px;
+    width: 65px;
     height: 60px;
     bottom: 100%;
     top: 0;
-    transform: translate(-35px, -32px);
+    right: 3px;
+    transform: translate(20px, -32px);
 }
+
 
 .table-border {
     border: 2px solid var(--lavender-gray);

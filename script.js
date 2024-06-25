@@ -1,13 +1,19 @@
 const table = document.querySelector(".table-container");
+
 const paid = document.querySelector(".paid");
 const unpaid = document.querySelector(".unpaid");
 const overdue = document.querySelector(".overdue");
+
 const filter = document.querySelector(".filter-btn");
 const filterCrud = document.querySelector(".filter-crud");
 const allUsers = document.querySelectorAll(".all-users");
+
 const activeUsers = document.querySelector(".active-users");
 const inactiveUsers = document.querySelector(".inactive-users");
 const addActiveColor = document.querySelectorAll(".add-active");
+
+const searchUsers = document.querySelector(".search-bar");
+const searchFiled = document.querySelector(".search-field");
 
 let users = [
   {
@@ -110,9 +116,19 @@ function renderTable(users) {
   });
 }
 
-function filterePaidUsers(filterType) {
+function filtereUsers(filterType) {
   let filteredUsers;
   switch (filterType) {
+    case "active":
+      filteredUsers = users.filter((user) =>
+        user["user status"].includes("Active")
+      );
+      break;
+    case "inactive":
+      filteredUsers = users.filter((user) =>
+        user["user status"].includes("Inactive")
+      );
+      break;
     case "paid":
       filteredUsers = users.filter((user) =>
         user["payment status"].includes("Paid")
@@ -128,23 +144,12 @@ function filterePaidUsers(filterType) {
         user["payment status"].includes("Overdue")
       );
       break;
-    default:
-      filteredUsers = users;
-  }
-  renderTable(filteredUsers);
-}
-
-function filtereActivedUsers(filterType) {
-  let filteredUsers;
-  switch (filterType) {
-    case "active":
-      filteredUsers = users.filter((user) =>
-        user["user status"].includes("Active")
-      );
-      break;
-    case "inactive":
-      filteredUsers = users.filter((user) =>
-        user["user status"].includes("Inactive")
+    case "searchUsers":
+      const searchInputValue = searchFiled.value.trim().toLowerCase();
+      filteredUsers = users.filter(
+        (user) =>
+          user.name[0].toLowerCase().includes(searchInputValue) ||
+          user["user status"][1].toLowerCase().includes(searchInputValue)
       );
       break;
     default:
@@ -164,17 +169,23 @@ filter.addEventListener("click", (event) => {
   filterCrud.classList.toggle("hidden");
 });
 
+searchFiled.addEventListener("input", () => filtereUsers("searchUsers"));
+
 for (let user of allUsers) {
-  user.addEventListener("click", filtereActivedUsers);
+  user.addEventListener("click", filtereUsers);
 }
 
 for (let active of addActiveColor) {
   active.addEventListener("click", addActiveClass);
 }
 
-paid.addEventListener("click", () => filterePaidUsers("paid"));
-unpaid.addEventListener("click", () => filterePaidUsers("unpaid"));
-overdue.addEventListener("click", () => filterePaidUsers("overdue"));
+for (let active of addActiveColor) {
+  active.addEventListener("mouseover", addActiveClass);
+}
 
-activeUsers.addEventListener("click", () => filtereActivedUsers("active"));
-inactiveUsers.addEventListener("click", () => filtereActivedUsers("inactive"));
+paid.addEventListener("click", () => filtereUsers("paid"));
+unpaid.addEventListener("click", () => filtereUsers("unpaid"));
+overdue.addEventListener("click", () => filtereUsers("overdue"));
+
+activeUsers.addEventListener("click", () => filtereUsers("active"));
+inactiveUsers.addEventListener("click", () => filtereUsers("inactive"));
