@@ -10,9 +10,11 @@ const allUsers = document.querySelectorAll(".all-users");
 
 const activeUsers = document.querySelector(".active-users");
 const inactiveUsers = document.querySelector(".inactive-users");
-const addActiveColor = document.querySelectorAll(".add-active");
 
-const searchUsers = document.querySelector(".search-bar");
+const addActiveColor = document.querySelectorAll(".add-active");
+const addActiveBorder = document.querySelectorAll(".add-active-border");
+
+const searchBar = document.querySelector(".search-bar");
 const searchFiled = document.querySelector(".search-field");
 
 let users = [
@@ -97,10 +99,10 @@ function renderTable(users) {
   for (let header of headers) {
     const tableHeader = document.createElement("th");
     headerRow.appendChild(tableHeader);
-    tableHeader.textContent = header.toUpperCase();
+    tableHeader.textContent = header;
   }
-  table.appendChild(headerRow);
 
+  table.appendChild(headerRow);
   users.forEach((user) => {
     const objValues = Object.values(user);
     objValues.shift();
@@ -165,11 +167,28 @@ function addActiveClass() {
   }
 }
 
+function activeBorder() {
+  for (let activeEl of addActiveBorder) {
+    this.classList.add("active-border") ||
+      this.classList.replace("base-border", "active-border");
+  }
+}
+
 filter.addEventListener("click", (event) => {
   filterCrud.classList.toggle("hidden");
 });
 
 searchFiled.addEventListener("input", () => filtereUsers("searchUsers"));
+
+searchBar.addEventListener("mouseover", () => {
+  addActiveBorder();
+  searchFiled.focus();
+});
+searchFiled.addEventListener("blur", () => {
+  searchFiled.value === ""
+    ? searchBar.classList.remove("active-border")
+    : addActiveBorder();
+});
 
 for (let user of allUsers) {
   user.addEventListener("click", filtereUsers);
@@ -181,6 +200,10 @@ for (let active of addActiveColor) {
 
 for (let active of addActiveColor) {
   active.addEventListener("mouseover", addActiveClass);
+}
+
+for (let activeEl of addActiveBorder) {
+  activeEl.addEventListener("mouseover", activeBorder);
 }
 
 paid.addEventListener("click", () => filtereUsers("paid"));
