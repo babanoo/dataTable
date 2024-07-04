@@ -157,6 +157,10 @@
     display: none;
 }
 
+.d-block {
+    display: block;
+}
+
 .header-navigation {
     margin-bottom: 10px;
     padding-bottom: 10px;
