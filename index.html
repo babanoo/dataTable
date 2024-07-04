@@ -8,12 +8,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body class="container body">
     <header>
         <h1 class="heading text-uppercase font-14 kimberly-text-color">table heading</h1>
-        <div class="flex-between border-bottom">
+        <div class="flex-between border-bottom header-navigation">
             <nav>
                 <ul class="main-list d-flex">
                     <li class="sub-list"><button class="base-button font-600 active all-users text-capitalize add-active">all</button></li>
@@ -31,7 +32,7 @@
     </header>
 
     <main class="base-border">
-        <div class="flex-between filter-table">
+        <div class="flex-between filter-table bg-white">
          <div class="flex-center">
            <button class="base-button text-capitalize base-border filter-btn font-16 add-active-border"><i class="fa fa-filter kimberly-text-color font-18"></i>filter</button>
 
@@ -43,31 +44,31 @@
 
            <button class="base-button pay-dues-bttn text-uppercase font-600 font-16">pay dues</button>
         </div>
-        <div class="hidden filter-crud">
+        <div class="hidden filter-crud bg-white">
             <form>
-              <p class="text-uppercase crud-padding font-12 kimberly-text-color">sort by:</p>
+              <p class="text-uppercase font-12 kimberly-text-color">sort by:</p>
                <ul class="border-bottom">
-                <li class="flex-between filter-list crud-padding">
+                <li class="flex-between filter-list">
                     <label for="default" class="text-capitalize font-14 all-users">default</label>
                     <input type="radio" id="default" name="sort" checked="checked">
                 </li>
 
-               <li class="flex-between filter-list crud-padding">
+               <li class="flex-between filter-list">
                 <label for="first-name" class="text-capitalize font-14 first-name">first name</label>
                 <input type="radio" id="first-name" name="sort">
                </li>
 
-              <li class="flex-between filter-list crud-padding">
+              <li class="flex-between filter-list">
                <label for="last-name" class="text-capitalize font-14 last-name">last name</label>
                <input type="radio" id="last-name" name="sort">
               </li>
 
-              <li class="flex-between filter-list crud-padding">
+              <li class="flex-between filter-list">
                <label for="due-date" class="text-capitalize font-14 due-date">due date</label>
                <input type="radio" id="due-date" name="sort">
               </li>
 
-              <li class="flex-between filter-list crud-padding">
+              <li class="flex-between filter-list">
                <label for="last-login" class="text-capitalize font-14 last-login">last login</label>
                <input type="radio" id="last-login" name="sort">
               </li>
@@ -75,17 +76,17 @@
 
         <p class="text-uppercase crud-padding font-12 kimberly-text-color">users:</p>
           <ul>
-            <li class="flex-between filter-list crud-padding">
+            <li class="flex-between filter-list">
                 <label for="all" class="text-capitalize font-14 all-users">all</label>
                 <input type="radio" id="all" name="users" checked="checked">
             </li>
 
-            <li class="flex-between filter-list crud-padding">
+            <li class="flex-between filter-list">
                 <label for="active" class="text-capitalize font-14 active-users">active</label>
                 <input type="radio" id="active" name="users">
             </li>
 
-            <li class="flex-between filter-list crud-padding">
+            <li class="flex-between filter-list">
                 <label for="inactive" class="text-capitalize font-14 inactive-users">inactive</label>
                 <input type="radio" id="inactive" name="users">
             </li>
@@ -93,7 +94,8 @@
          </form>
    </div>
 
-        <table class="table-container"></table>
+        <table class="table-container">
+        </table>
     </main>
  <script src="./script.js"></script>   
 </body>

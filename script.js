@@ -24,6 +24,7 @@ let users = [
     "user status": ["Active", "Last Login: 14/APR/2020"],
     "payment status": ["Paid", "Paid on 15/APR/2020"],
     amount: ["$200", "USD"],
+    "": "View More",
   },
   {
     id: "u2",
@@ -31,6 +32,7 @@ let users = [
     "user status": ["Active", "Last Login: 14/APR/2020"],
     "payment status": ["Overdue", "Dued on 15/APR/2020"],
     amount: ["$300", "USD"],
+    "": "View More",
   },
   {
     id: "u3",
@@ -38,6 +40,7 @@ let users = [
     "user status": ["Active", "Last Login: 14/APR/2020"],
     "payment status": ["Paid", "Paid on 15/APR/2020"],
     amount: ["$250", "USD"],
+    "": "View More",
   },
   {
     id: "u4",
@@ -45,6 +48,7 @@ let users = [
     "user status": ["Active", "Last Login: 14/APR/2020"],
     "payment status": ["Unpaid", "Dues on 15/APR/2020"],
     amount: ["$200", "USD"],
+    "": "View More",
   },
   {
     id: "u5",
@@ -52,6 +56,7 @@ let users = [
     "user status": ["Inactive", "Last Login: 14/APR/2020"],
     "payment status": ["Paid", "Paid on 15/APR/2020"],
     amount: ["$200", "USD"],
+    "": "View More",
   },
   {
     id: "u6",
@@ -59,6 +64,7 @@ let users = [
     "user status": ["Inactive", "Last Login: 14/APR/2020"],
     "payment status": ["Paid", "Paid on 15/APR/2020"],
     amount: ["$750", "USD"],
+    "": "View More",
   },
   {
     id: "u7",
@@ -66,6 +72,7 @@ let users = [
     "user status": ["Active", "Last Login: 14/APR/2020"],
     "payment status": ["Unpaid", "Dues on 15/APR/2020"],
     amount: ["$200", "USD"],
+    "": "View More",
   },
   {
     id: "u8",
@@ -73,6 +80,7 @@ let users = [
     "user status": ["Active", "Last Login: 14/APR/2020"],
     "payment status": ["Paid", "Paid on 15/APR/2020"],
     amount: ["$370", "USD"],
+    "": "View More",
   },
   {
     id: "u9",
@@ -80,6 +88,7 @@ let users = [
     "user status": ["Inactive", "Last Login: 14/APR/2020"],
     "payment status": ["Unpaid", "Dues on 15/APR/2020"],
     amount: ["$200", "USD"],
+    "": "View More",
   },
   {
     id: "u10",
@@ -87,6 +96,7 @@ let users = [
     "user status": ["Inactive", "Last Login: 14/APR/2020"],
     "payment status": ["Paid", "Paid on 15/APR/2020"],
     amount: ["$150", "USD"],
+    "": "View More",
   },
 ];
 renderTable(users);
@@ -94,26 +104,74 @@ function renderTable(users) {
   table.innerHTML = "";
   const headers = Object.keys(users[0]);
   const headerRow = document.createElement("tr");
+  headerRow.classList.add("base-border");
   headers.shift();
+  console.log(headerRow);
+
+  const th = document.createElement("th");
+  th.classList.add("cell-padding", "left-text");
+  headerRow.appendChild(th);
+  const checkButtonEl = document.createElement("button");
+  checkButtonEl.classList.add("base-button", "bi", "bi-square");
+  th.appendChild(checkButtonEl);
+
+  const th2 = document.createElement("th");
+  th2.classList.add("cell-padding", "left-text");
+  th2.textContent = "";
+  headerRow.appendChild(th2);
 
   for (let header of headers) {
     const tableHeader = document.createElement("th");
+    tableHeader.classList.add("cell-padding", "left-text");
     headerRow.appendChild(tableHeader);
-    tableHeader.textContent = header;
+    tableHeader.textContent = header.toUpperCase();
   }
 
+  const th3 = document.createElement("th");
+  th3.classList.add("cell-padding", "left-text");
+  const moreButtonEl = document.createElement("button");
+  th3.appendChild(moreButtonEl);
+  moreButtonEl.classList.add("bi", "bi-three-dots-vertical", "base-button");
+  headerRow.appendChild(th3);
+
   table.appendChild(headerRow);
+
   users.forEach((user) => {
-    const objValues = Object.values(user);
-    objValues.shift();
     const contentRow = document.createElement("tr");
+    contentRow.classList.add("base-border", "bg-white");
+
+    const td1 = document.createElement("td");
+    td1.classList.add("cell-padding");
+    const checkedButtonEl = document.createElement("button");
+    td1.appendChild(checkedButtonEl);
+    checkedButtonEl.classList.add("bi", "bi-square", "base-button");
+    contentRow.appendChild(td1);
+
+    const td2 = document.createElement("td");
+    td2.classList.add("cell-padding");
+    const dropDownBttn = document.createElement("button");
+    td2.appendChild(dropDownBttn);
+    dropDownBttn.classList.add("fa", "fa-chevron-circle-down", "base-button");
+    contentRow.appendChild(td2);
+
+    const objValues = Object.values(user);
+
+    objValues.shift();
     objValues.forEach((el) => {
       const tableContent = document.createElement("td");
+      tableContent.classList.add("cell-padding");
       contentRow.appendChild(tableContent);
       typeof el === "object"
         ? (tableContent.innerHTML = el.join("<br>"))
         : (tableContent.textContent = el);
     });
+
+    const td3 = document.createElement("td");
+    td3.classList.add("cell-padding");
+    const moreBttnEl = document.createElement("button");
+    td3.appendChild(moreBttnEl);
+    moreBttnEl.classList.add("bi", "bi-three-dots-vertical", "base-button");
+    contentRow.appendChild(td3);
     table.appendChild(contentRow);
   });
 }
@@ -148,10 +206,8 @@ function filtereUsers(filterType) {
       break;
     case "searchUsers":
       const searchInputValue = searchFiled.value.trim().toLowerCase();
-      filteredUsers = users.filter(
-        (user) =>
-          user.name[0].toLowerCase().includes(searchInputValue) ||
-          user["user status"][1].toLowerCase().includes(searchInputValue)
+      filteredUsers = users.filter((user) =>
+        user.name[0].toLowerCase().includes(searchInputValue)
       );
       break;
     default:
@@ -181,7 +237,6 @@ filter.addEventListener("click", (event) => {
 searchFiled.addEventListener("input", () => filtereUsers("searchUsers"));
 
 searchBar.addEventListener("mouseover", () => {
-  addActiveBorder();
   searchFiled.focus();
 });
 searchFiled.addEventListener("blur", () => {
