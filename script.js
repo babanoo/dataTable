@@ -156,25 +156,14 @@ function renderTable(users) {
 
     const objValues = Object.values(user);
     objValues.shift();
-    const strongEl = document.createElement("strong");
+
     objValues.forEach((el) => {
       const tableContent = document.createElement("td");
       tableContent.classList.add("cell-padding");
       contentRow.appendChild(tableContent);
-
-      const spanEl = document.createElement("span");
-      spanEl.classList.add("d-block");
-
-      if (typeof el === "object") {
-        spanEl.textContent = el[1];
-        strongEl.textContent = objValues[3][0];
-        tableContent.appendChild(strongEl);
-        tableContent.appendChild(spanEl);
-
-        console.log(tableContent);
-      } else {
-        tableContent.textContent = el;
-      }
+      typeof el === "object"
+        ? (tableContent.innerHTML = el.join("<br>"))
+        : (tableContent.textContent = el);
     });
 
     const td3 = document.createElement("td");
