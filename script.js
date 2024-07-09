@@ -171,6 +171,54 @@ function renderTable(users) {
     const moreBttnEl = document.createElement("button");
     td3.appendChild(moreBttnEl);
     moreBttnEl.classList.add("bi", "bi-three-dots-vertical", "base-button");
+
+    const moreCard = document.createElement("div");
+    moreCard.classList.add("bg-white", "more-card");
+
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.classList.add("base-button", "d-block", "padding-5", "font-16");
+    moreCard.appendChild(editButton);
+
+    const viewProfile = document.createElement("button");
+    viewProfile.textContent = "View Profile";
+    viewProfile.classList.add("base-button", "d-block", "padding-5", "font-16");
+    moreCard.appendChild(viewProfile);
+
+    const activeUser = document.createElement("button");
+    activeUser.textContent = "Activate User";
+    activeUser.classList.add(
+      "base-button",
+      "d-block",
+      "border-bottom",
+      "padding-5",
+      "activate-user-bttn",
+      "font-16"
+    );
+    moreCard.appendChild(activeUser);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.classList.add(
+      "base-button",
+      "d-block",
+      "padding-5",
+      "delete-bttn",
+      "font-16"
+    );
+    moreCard.appendChild(deleteButton);
+
+    const cardFlex = document.createElement("div");
+    cardFlex.classList.add("d-flex");
+
+    cardFlex.appendChild(moreCard);
+
+    const removeMoreCard = document.createElement("button");
+    removeMoreCard.classList.add("base-button", "bi", "bi-x", "remove-card");
+
+    cardFlex.appendChild(removeMoreCard);
+
+    td3.appendChild(cardFlex);
     contentRow.appendChild(td3);
     table.appendChild(contentRow);
   });
