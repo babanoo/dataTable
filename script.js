@@ -173,16 +173,16 @@ function renderTable(users) {
     moreBttnEl.classList.add("bi", "bi-three-dots-vertical", "base-button");
 
     const moreCard = document.createElement("div");
-    moreCard.classList.add("bg-white", "more-card");
+    moreCard.classList.add("bg-white", "more-card", "box-shadow", "p-relative");
 
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
-    editButton.classList.add("base-button", "d-block", "padding-5", "font-16");
+    editButton.classList.add("base-button", "d-block", "padding-3", "font-16");
     moreCard.appendChild(editButton);
 
     const viewProfile = document.createElement("button");
     viewProfile.textContent = "View Profile";
-    viewProfile.classList.add("base-button", "d-block", "padding-5", "font-16");
+    viewProfile.classList.add("base-button", "d-block", "padding-3", "font-16");
     moreCard.appendChild(viewProfile);
 
     const activeUser = document.createElement("button");
@@ -190,8 +190,7 @@ function renderTable(users) {
     activeUser.classList.add(
       "base-button",
       "d-block",
-      "border-bottom",
-      "padding-5",
+      "padding-3",
       "activate-user-bttn",
       "font-16"
     );
@@ -202,7 +201,7 @@ function renderTable(users) {
     deleteButton.classList.add(
       "base-button",
       "d-block",
-      "padding-5",
+      "padding-3",
       "delete-bttn",
       "font-16"
     );
@@ -266,8 +265,8 @@ function filtereUsers(filterType) {
 
 function addActiveClass() {
   for (let activeBttn of addActiveColor) {
-    activeBttn.classList.remove("active");
-    this.classList.add("active");
+    activeBttn.classList.remove("active", "p-relative");
+    this.classList.add("active", "p-relative");
   }
 }
 

@@ -39,10 +39,19 @@
     gap: 20px;
 }
 
+.flex-content-center {
+    display: flex;
+    justify-content: center;
+}
 
 .d-flex {
     display: flex;
     align-items: flex-start;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
 }
 
 .body {
@@ -98,8 +107,16 @@
     background-color: var(--white);
 }
 
+.box-shadow {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
 .left-text {
   text-align: left;
+}
+
+.center-text {
+    text-align: center;
 }
 
 .main-list {
@@ -117,7 +134,11 @@
 }
 
 .border-bottom {
-    border-bottom: 2px solid var(--lavender-gray);
+    border-bottom: 2px solid var(--snuff);
+}
+
+.border-gray {
+    border-color: var(--lavender-gray);
 }
 
 .base-border {
@@ -133,10 +154,13 @@
     color: var(--blue-marguerite);
 }
 
+.p-relative {
+    position: relative;
+}
+
 .active {
     color: var(--bleu);
     font-weight: 600;
-    position: relative;
 }
 
 .active::after {
@@ -159,8 +183,20 @@
     display: block;
 }
 
-.padding-5 {
+.padding-3 {
    padding: 3px;
+}
+
+.mr-15 {
+    margin-right: 15px;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.pb-5 {
+    padding-bottom: 5px;
 }
 
 .header-navigation {
@@ -193,7 +229,7 @@
 }
 
 .filter-list {
-    padding-top: 10px;
+    padding: 5px;
 }
 
 .filter-list:hover {
@@ -242,13 +278,24 @@
 
 .more-card {
     padding: 5px 35px 5px 5px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 10px;
 }
 
 .activate-user-bttn {
     padding-bottom: 10px;
     color: var(--green);
+}
+
+.activate-user-bttn::after {
+    content: "";
+    position: absolute;
+    border-bottom: 2px solid var(--snuff);
+    width: 90%;
+    height: 60px;
+    bottom: 100%;
+    top: 0;
+    left: 5%;
+    transform: translateY(40%);
 }
 
 .delete-bttn {
@@ -269,13 +316,22 @@
 }
 
 .modal {
-    color: black;
-    width: 500px;
-    height: 250px;
-    border-radius: 15px;
+    width: 600px;
+    height: 320px;
+    border-radius: 10px;
+    padding: 20px 10px 0px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-10%);
+    z-index: 1;
 }
 
 .modal-input {
-    border-radius: 10px;
-    margin-bottom: 10px;
+    border-radius: 22px;
+    margin: 10px 0 20px;
+    width: 220px;
+    height: 38px;
+    padding: 0 5px;
+    outline: none;
+    background-color: var(--snuff);
 }

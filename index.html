@@ -14,10 +14,10 @@
 <body class="container body">
     <header>
         <h1 class="heading text-uppercase font-14 kimberly-text-color">table heading</h1>
-        <div class="flex-between border-bottom header-navigation">
+        <div class="flex-between border-bottom border-gray header-navigation">
             <nav>
                 <ul class="main-list d-flex">
-                    <li class="sub-list"><button class="base-button font-600 active all-users text-capitalize add-active">all</button></li>
+                    <li class="sub-list"><button class="base-button font-600 active p-relative all-users text-capitalize add-active">all</button></li>
                     <li class="sub-list"><button class="base-button font-600 text-capitalize paid kimberly-text-color add-active">paid</button></li>
                     <li class="sub-list"><button class="base-button font-600 text-capitalize unpaid kimberly-text-color add-active">unpaid</button></li>
                     <li class="sub-list"><button class="base-button font-600 text-capitalize overdue kimberly-text-color add-active">overdue</button></li>
@@ -48,7 +48,7 @@
         <div class="hidden filter-crud bg-white">
             <form>
               <p class="text-uppercase font-12 kimberly-text-color">sort by:</p>
-               <ul class="border-bottom">
+               <ul class="border-bottom mb-10 pb-5">
                 <li class="flex-between filter-list">
                     <label for="default" class="text-capitalize font-14 all-users">default</label>
                     <input type="radio" id="default" name="sort" checked="checked">
@@ -75,7 +75,7 @@
               </li>
             </ul>
 
-        <p class="text-uppercase crud-padding font-12 kimberly-text-color">users:</p>
+        <p class="text-uppercase font-12 kimberly-text-color">users:</p>
           <ul>
             <li class="flex-between filter-list">
                 <label for="all" class="text-capitalize font-14 all-users">all</label>
@@ -98,22 +98,40 @@
         </table>
     </section>
 
-     <section>
-        <div class="bg-white modal">
-            <form>
-                <label for="name" class="d-block font-16 font-600">Name</label>
-                <input type="text" class="d-block base-border modal-input" id="name">
-                <label for="email" class="d-block font-16 font-600">Email</label>
-                <input type="email" class="d-block base-border modal-input" id="email">
-                <label for="statut" class="d-block font-16 font-600">Statut</label>
-                <select id="statut" class="d-block base-border modal-input">
+     <section class="flex-content-center">
+        <div class="bg-white modal box-shadow">
+            <form class="flex-center flex-column">
+            <div class="d-flex">
+              <div class="mr-15">
+                <label for="name" class="d-block center-text font-16 font-600">Name</label>
+                <input type="text" class="d-block base-border font-16 modal-input" id="name">
+              </div>
+
+              <div>
+                <label for="email" class="d-block center-text font-16 font-600">Email</label>
+                <input type="email" class="d-block base-border font-16 modal-input" id="email">
+               </div>
+            </div>
+
+             <div>
+                <label for="login" class="d-block font-16 font-600 center-text">Last Login</label>
+                <input type="text" class="d-block font-16 base-border modal-input" class="d-block modal-input" id="login">
+              </div>
+              
+               <div class="d-flex">
+               <div class="mr-15">
+                <label for="statut" class="d-block center-text font-16 font-600">Statut</label>
+                <select id="statut" class="d-block base-border font-16 modal-input">
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
                 </select>
-                <label for="login" class="d-block font-16 font-600">Last Login</label>
-                <input type="text" class="d-block base-border modal-input" class="d-block modal-input" id="login">
-                <label for="number" class="d-block font-16 font-600">Amount</label>
-                <input type="number" class="d-block base-border modal-input" id="number" min="1" max="500">
+              </div>
+
+              <div>
+                <label for="number" class="d-block center-text font-16 font-600">Amount</label>
+                <input type="number" class="d-block font-16 base-border modal-input" id="number" min="1" max="500">
+            </div>
+            </div>
             </form>
         </div>
      </section>
