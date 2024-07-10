@@ -272,4 +272,10 @@
     color: black;
     width: 500px;
     height: 250px;
+    border-radius: 15px;
+}
+
+.modal-input {
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
