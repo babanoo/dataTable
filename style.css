@@ -101,6 +101,7 @@
     font-weight: 600;
 }
 
+
 .font-400 {
     font-weight: 400;
 }
@@ -379,7 +380,7 @@
     width: 20px;
     height: 20px;
     color: var(--Kimberly);
-    font-size: 20px;
+    font-size: 16px;
     transform: translateX(-30px);
 }
 
