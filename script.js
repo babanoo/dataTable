@@ -117,7 +117,8 @@ function renderTable(users) {
     "font-20",
     "lavender-purple-color",
     "bi",
-    "bi-square"
+    "bi-square",
+    "cursor-pointer"
   );
   th.appendChild(checkButtonEl);
 
@@ -128,6 +129,7 @@ function renderTable(users) {
 
   for (let header of headers) {
     const tableHeader = document.createElement("th");
+    tableHeader.classList.add("kimberly-text-color", "font-14");
     tableHeader.classList.add("cell-padding", "left-text");
     headerRow.appendChild(tableHeader);
     tableHeader.textContent = header.toUpperCase();
@@ -142,7 +144,8 @@ function renderTable(users) {
     "bi-three-dots-vertical",
     "font-20",
     "lavender-purple-color",
-    "base-button"
+    "base-button",
+    "cursor-pointer"
   );
   headerRow.appendChild(th3);
 
@@ -161,7 +164,8 @@ function renderTable(users) {
       "bi-square",
       "font-20",
       "lavender-purple-color",
-      "base-button"
+      "base-button",
+      "cursor-pointer"
     );
     contentRow.appendChild(td1);
 
@@ -172,11 +176,12 @@ function renderTable(users) {
     dropDownBttn.classList.add(
       "fa",
       "fa-chevron-down",
-      "lavender-purple-color",
+      "kimberly-text-color",
       "font-14",
       "radius-50",
       "base-button",
-      "drop-down-bttn"
+      "drop-down-bttn",
+      "cursor-pointer"
     );
     contentRow.appendChild(td2);
 
@@ -201,7 +206,8 @@ function renderTable(users) {
       "bi-three-dots-vertical",
       "font-20",
       "lavender-purple-color",
-      "base-button"
+      "base-button",
+      "cursor-pointer"
     );
 
     const moreCard = document.createElement("div");
@@ -209,12 +215,24 @@ function renderTable(users) {
 
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
-    editButton.classList.add("base-button", "d-block", "padding-3", "font-16");
+    editButton.classList.add(
+      "base-button",
+      "d-block",
+      "padding-3",
+      "font-16",
+      "cursor-pointer"
+    );
     moreCard.appendChild(editButton);
 
     const viewProfile = document.createElement("button");
     viewProfile.textContent = "View Profile";
-    viewProfile.classList.add("base-button", "d-block", "padding-3", "font-16");
+    viewProfile.classList.add(
+      "base-button",
+      "d-block",
+      "padding-3",
+      "font-16",
+      "cursor-pointer"
+    );
     moreCard.appendChild(viewProfile);
 
     const activeUser = document.createElement("button");
@@ -224,7 +242,8 @@ function renderTable(users) {
       "d-block",
       "padding-3",
       "activate-user-bttn",
-      "font-16"
+      "font-16",
+      "cursor-pointer"
     );
     moreCard.appendChild(activeUser);
 
@@ -235,12 +254,13 @@ function renderTable(users) {
       "d-block",
       "padding-3",
       "delete-bttn",
-      "font-16"
+      "font-16",
+      "cursor-pointer"
     );
     moreCard.appendChild(deleteButton);
 
     const cardFlex = document.createElement("div");
-    cardFlex.classList.add("d-flex");
+    cardFlex.classList.add("d-flex", "hidden", "card-container");
 
     cardFlex.appendChild(moreCard);
 
@@ -252,7 +272,8 @@ function renderTable(users) {
       "lavender-purple-color",
       "radius-50",
       "remove-card",
-      "padding-3"
+      "padding-3",
+      "cursor-pointer"
     );
 
     cardFlex.appendChild(removeMoreCard);
@@ -354,3 +375,10 @@ overdue.addEventListener("click", () => filtereUsers("overdue"));
 
 activeUsers.addEventListener("click", () => filtereUsers("active"));
 inactiveUsers.addEventListener("click", () => filtereUsers("inactive"));
+
+const moreBttnEls = document.querySelectorAll(".bi-three-dots-vertical");
+const cardFlexes = document.querySelectorAll(".card-container");
+
+for (let button of moreBttnEls) {
+  button.addEventListener("click", (event) => {});
+}

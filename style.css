@@ -137,10 +137,13 @@
     margin: 0 20px;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 .base-button {
   border: none;
   background-color: transparent;
-  cursor: pointer;
 }
 
 .border-bottom {
@@ -327,7 +330,7 @@
 }
 
 .drop-down-bttn {
-    border: 3px solid var(--lavender-purple);
+    border: 2px solid var(--Kimberly);
     padding: 2px;
 }
 
