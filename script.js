@@ -112,7 +112,13 @@ function renderTable(users) {
   th.classList.add("cell-padding", "left-text");
   headerRow.appendChild(th);
   const checkButtonEl = document.createElement("button");
-  checkButtonEl.classList.add("base-button", "bi", "bi-square");
+  checkButtonEl.classList.add(
+    "base-button",
+    "font-20",
+    "lavender-purple-color",
+    "bi",
+    "bi-square"
+  );
   th.appendChild(checkButtonEl);
 
   const th2 = document.createElement("th");
@@ -131,7 +137,13 @@ function renderTable(users) {
   th3.classList.add("cell-padding", "left-text");
   const moreButtonEl = document.createElement("button");
   th3.appendChild(moreButtonEl);
-  moreButtonEl.classList.add("bi", "bi-three-dots-vertical", "base-button");
+  moreButtonEl.classList.add(
+    "bi",
+    "bi-three-dots-vertical",
+    "font-20",
+    "lavender-purple-color",
+    "base-button"
+  );
   headerRow.appendChild(th3);
 
   table.appendChild(headerRow);
@@ -144,14 +156,28 @@ function renderTable(users) {
     td1.classList.add("cell-padding");
     const checkedButtonEl = document.createElement("button");
     td1.appendChild(checkedButtonEl);
-    checkedButtonEl.classList.add("bi", "bi-square", "base-button");
+    checkedButtonEl.classList.add(
+      "bi",
+      "bi-square",
+      "font-20",
+      "lavender-purple-color",
+      "base-button"
+    );
     contentRow.appendChild(td1);
 
     const td2 = document.createElement("td");
     td2.classList.add("cell-padding");
     const dropDownBttn = document.createElement("button");
     td2.appendChild(dropDownBttn);
-    dropDownBttn.classList.add("fa", "fa-chevron-circle-down", "base-button");
+    dropDownBttn.classList.add(
+      "fa",
+      "fa-chevron-down",
+      "lavender-purple-color",
+      "font-14",
+      "radius-50",
+      "base-button",
+      "drop-down-bttn"
+    );
     contentRow.appendChild(td2);
 
     const objValues = Object.values(user);
@@ -170,7 +196,13 @@ function renderTable(users) {
     td3.classList.add("cell-padding");
     const moreBttnEl = document.createElement("button");
     td3.appendChild(moreBttnEl);
-    moreBttnEl.classList.add("bi", "bi-three-dots-vertical", "base-button");
+    moreBttnEl.classList.add(
+      "bi",
+      "bi-three-dots-vertical",
+      "font-20",
+      "lavender-purple-color",
+      "base-button"
+    );
 
     const moreCard = document.createElement("div");
     moreCard.classList.add("bg-white", "more-card", "box-shadow", "p-relative");
@@ -213,7 +245,15 @@ function renderTable(users) {
     cardFlex.appendChild(moreCard);
 
     const removeMoreCard = document.createElement("button");
-    removeMoreCard.classList.add("base-button", "bi", "bi-x", "remove-card");
+    removeMoreCard.classList.add(
+      "base-button",
+      "bi",
+      "bi-x",
+      "lavender-purple-color",
+      "radius-50",
+      "remove-card",
+      "padding-3"
+    );
 
     cardFlex.appendChild(removeMoreCard);
 
