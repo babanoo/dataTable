@@ -15,7 +15,6 @@
     --chelsea-gem: #965E00;
     --pippin: #FFE0E0;
     --overlay: #000000b1;
-
   }
 
 * {
@@ -352,6 +351,12 @@
     top: 40%;
     transform: translateY(-15%);
     z-index: 1;
+    border: none;
+    margin: 0 auto;
+}
+
+.modal-content::backdrop {
+    background-color: var(--overlay);
 }
 
 .close-button:hover {
@@ -369,17 +374,6 @@
 .update-user:hover {
     background: linear-gradient(135deg, #4267B2 0%, #6a11cb 100%)
 }
-
-
-dialog {
-    border: none;
-    margin: 0 auto;
-}
-
-dialog::backdrop {
-    background-color: var(--overlay);
-}
-
 
 .modal-input {
     border-radius: 22px;
