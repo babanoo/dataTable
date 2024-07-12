@@ -14,6 +14,8 @@
     --sandy-beach: #FFECCC;
     --chelsea-gem: #965E00;
     --pippin: #FFE0E0;
+    --overlay: #000000b1;
+
   }
 
 * {
@@ -113,6 +115,7 @@
 .lavender-purple-color {
     color: var(--lavender-purple);
 }
+
 
 .bg-white {
     background-color: var(--white);
@@ -218,6 +221,10 @@
 
 .pb-5 {
     padding-bottom: 5px;
+}
+
+.overflow-hidden {
+    overflow: hidden;
 }
 
 .header-navigation {
@@ -335,26 +342,55 @@
     padding: 2px;
 }
 
-.modal {
-    width: 600px;
-    height: 320px;
+
+ .modal-content {
+    width: 580px;
+    height: 400px;
     border-radius: 10px;
-    padding: 20px 10px 0px;
+    padding: 18px 10px 15px;
     position: absolute;
-    top: 50%;
-    transform: translateY(-10%);
+    top: 40%;
+    transform: translateY(-15%);
     z-index: 1;
 }
 
+.close-button:hover {
+  color: var(--blue-marguerite);
+}
+
+.update-user {
+  background-color: var(--blue-marguerite);
+  color: var(--white);
+  width: 100%;
+  padding: 10px 0;
+  border-radius: 15px;
+}
+
+.update-user:hover {
+    background: linear-gradient(135deg, #4267B2 0%, #6a11cb 100%)
+}
+
+
+dialog {
+    border: none;
+    margin: 0 auto;
+}
+
+dialog::backdrop {
+    background-color: var(--overlay);
+}
+
+
 .modal-input {
     border-radius: 22px;
-    margin: 10px 0 20px;
+    margin: 5px 0 20px;
     width: 220px;
     height: 38px;
     padding: 0 5px;
     outline: none;
     background-color: var(--snuff);
 }
+
 
 .table-pages {
     padding: 15px 0;
@@ -383,4 +419,5 @@
     font-size: 16px;
     transform: translateX(-30px);
 }
+
 

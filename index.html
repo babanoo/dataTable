@@ -121,9 +121,10 @@
     </div>
     </section>
 
-     <section class="flex-content-center">
-        <div class="bg-white modal box-shadow">
-            <form class="flex-center flex-column">
+     <section class="modal">
+        <dialog class="bg-white modal-content box-shadow overflow-hidden">
+            <button class="close-button base-button cursor-pointer font-18 font-600" aria-label="Close">&#10005;</button>
+            <form class="flex-center flex-column flex-content-center" method="dialog">
             <div class="d-flex">
               <div class="mr-15">
                 <label for="name" class="d-block center-text font-16 font-600">Name</label>
@@ -155,8 +156,9 @@
                 <input type="number" class="d-block font-16 base-border modal-input" id="number" min="1" max="500">
             </div>
             </div>
+            <input type="submit" value="Update" class="base-button font-18 font-600 update-user cursor-pointer">
             </form>
-        </div>
+        </dialog>
      </section>
     </main>
     

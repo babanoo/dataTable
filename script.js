@@ -378,7 +378,18 @@ inactiveUsers.addEventListener("click", () => filtereUsers("inactive"));
 
 const moreBttnEls = document.querySelectorAll(".bi-three-dots-vertical");
 const cardFlexes = document.querySelectorAll(".card-container");
+const modal = document.querySelector(".modal-content");
+const closeModal = document.querySelector(".close-button");
+const body = document.querySelector(".body");
 
 for (let button of moreBttnEls) {
-  button.addEventListener("click", (event) => {});
+  button.addEventListener("click", (event) => {
+    modal.showModal();
+    body.classList.add("overflow-hidden");
+  });
 }
+
+closeModal.addEventListener("click", () => {
+  modal.close();
+  body.classList.remove("overflow-hidden");
+});
