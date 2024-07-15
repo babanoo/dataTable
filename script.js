@@ -21,6 +21,12 @@ const modal = document.querySelector(".modal-content");
 const closeModal = document.querySelector(".close-button");
 const body = document.querySelector(".body");
 
+const nameInput = document.querySelector("#name");
+const emailInput = document.querySelector("#email");
+const dateInput = document.querySelector("#login");
+const statutInput = document.querySelector("#statut");
+const numberInput = document.querySelector("#number");
+
 let users = [
   {
     id: "u1",
@@ -229,7 +235,8 @@ function renderTable(users) {
       "cursor-pointer",
       "hover-bg",
       "card-bttns",
-      "left-text"
+      "left-text",
+      "edit-buttn"
     );
     moreCard.appendChild(editButton);
 
@@ -348,7 +355,7 @@ function filtereUsers(filterType) {
 function addActiveClass() {
   for (let activeBttn of addActiveColor) {
     activeBttn.classList.remove("active", "p-relative");
-    this.classList.add("active", "p-relative");
+    this.classList.add("active", "p-relative", "font-600");
   }
 }
 
@@ -400,6 +407,7 @@ inactiveUsers.addEventListener("click", () => filtereUsers("inactive"));
 const moreBttnEls = document.querySelectorAll(".bi-three-dots-vertical");
 const cardsContainer = document.querySelectorAll(".card-container");
 const removeCardEl = document.querySelectorAll(".remove-card");
+const editButtonEl = document.querySelectorAll(".edit-buttn");
 
 for (let button of moreBttnEls) {
   button.addEventListener("click", (event) => {
@@ -411,6 +419,13 @@ for (let button of moreBttnEls) {
 for (let removeBttn of removeCardEl) {
   removeBttn.addEventListener("click", () => {
     removeBttn.parentElement.classList.add("hidden");
+  });
+}
+
+for (let editBttn of editButtonEl) {
+  editBttn.addEventListener("click", () => {
+    modal.showModal();
+    body.classList.add("overflow-hidden");
   });
 }
 

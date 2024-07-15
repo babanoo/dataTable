@@ -185,19 +185,17 @@
 
 .active {
     color: var(--bleu);
-    font-weight: 600;
 }
 
-.active::after {
+.active::after { 
     content: "";
     position: absolute;
     border-bottom: 3px solid var(--bleu);
-    width: 50px;
-    height: 60px;
-    bottom: 100%;
-    top: 0;
-    right: 30%;
-    transform: translate(20px, -32px);
+    top: 100%;
+    width: 110%; 
+    bottom: 0; 
+    left: 0; 
+    transform: translateY(13px); 
 }
 
 .hidden {
@@ -337,6 +335,11 @@
     padding: 3px;
 }
 
+.remove-card:hover {
+    color: var(--white);
+    background-color: var(--blue-marguerite);
+}
+
 .activate-user-bttn {
     margin-bottom: 10px;
     color: var(--green);
@@ -366,7 +369,7 @@
     margin: 0 auto;
 }
 
-.modal-content5::backdrop {
+.modal-content::backdrop {
     background-color: var(--overlay);
 }
 
