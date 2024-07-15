@@ -17,6 +17,10 @@ const addActiveBorder = document.querySelectorAll(".add-active-border");
 const searchBar = document.querySelector(".search-bar");
 const searchFiled = document.querySelector(".search-field");
 
+const modal = document.querySelector(".modal-content");
+const closeModal = document.querySelector(".close-button");
+const body = document.querySelector(".body");
+
 let users = [
   {
     id: "u1",
@@ -100,6 +104,7 @@ let users = [
   },
 ];
 renderTable(users);
+
 function renderTable(users) {
   table.innerHTML = "";
   const headers = Object.keys(users[0]);
@@ -211,7 +216,11 @@ function renderTable(users) {
     );
 
     const moreCard = document.createElement("div");
-    moreCard.classList.add("bg-white", "more-card", "box-shadow", "p-relative");
+    moreCard.classList.add(
+      "bg-white",
+      "more-card",
+      "box-shadow" /*, "p-relative")*/
+    );
 
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
@@ -259,10 +268,10 @@ function renderTable(users) {
     );
     moreCard.appendChild(deleteButton);
 
-    const cardFlex = document.createElement("div");
-    cardFlex.classList.add("d-flex", "hidden", "card-container");
+    const cardContainer = document.createElement("div");
+    cardContainer.classList.add("hidden", "card-container");
 
-    cardFlex.appendChild(moreCard);
+    cardContainer.appendChild(moreCard);
 
     const removeMoreCard = document.createElement("button");
     removeMoreCard.classList.add(
@@ -276,9 +285,9 @@ function renderTable(users) {
       "cursor-pointer"
     );
 
-    cardFlex.appendChild(removeMoreCard);
+    cardContainer.appendChild(removeMoreCard);
 
-    td3.appendChild(cardFlex);
+    td3.appendChild(cardContainer);
     contentRow.appendChild(td3);
     table.appendChild(contentRow);
   });
@@ -377,15 +386,19 @@ activeUsers.addEventListener("click", () => filtereUsers("active"));
 inactiveUsers.addEventListener("click", () => filtereUsers("inactive"));
 
 const moreBttnEls = document.querySelectorAll(".bi-three-dots-vertical");
-const cardFlexes = document.querySelectorAll(".card-container");
-const modal = document.querySelector(".modal-content");
-const closeModal = document.querySelector(".close-button");
-const body = document.querySelector(".body");
+const cardsContainer = document.querySelectorAll(".card-container");
+const removeCardEl = document.querySelectorAll(".remove-card");
 
 for (let button of moreBttnEls) {
   button.addEventListener("click", (event) => {
-    modal.showModal();
-    body.classList.add("overflow-hidden");
+    button.nextSibling.classList.remove("hidden");
+    button.nextSibling.classList.add("d-flex");
+  });
+}
+
+for (let removeBttn of removeCardEl) {
+  removeBttn.addEventListener("click", () => {
+    removeBttn.parentElement.classList.add("hidden");
   });
 }
 
