@@ -212,15 +212,12 @@ function renderTable(users) {
       "font-20",
       "lavender-purple-color",
       "base-button",
-      "cursor-pointer"
+      "cursor-pointer",
+      "view-more-button"
     );
 
     const moreCard = document.createElement("div");
-    moreCard.classList.add(
-      "bg-white",
-      "more-card",
-      "box-shadow" /*, "p-relative")*/
-    );
+    moreCard.classList.add("bg-white", "more-card", "box-shadow", "p-relative");
 
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";

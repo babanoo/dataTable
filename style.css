@@ -15,6 +15,7 @@
     --chelsea-gem: #965E00;
     --pippin: #FFE0E0;
     --overlay: #000000b1;
+    --black: #000000;
   }
 
 * {
@@ -301,6 +302,10 @@
 .table-container {
     width: 100%;
     border-collapse: collapse;
+}
+
+.view-more-button:hover {
+   color: var(--black);
 }
 
 .more-card {
