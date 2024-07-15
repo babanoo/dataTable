@@ -224,9 +224,12 @@ function renderTable(users) {
     editButton.classList.add(
       "base-button",
       "d-block",
-      "padding-3",
+      "padding-5",
       "font-16",
-      "cursor-pointer"
+      "cursor-pointer",
+      "hover-bg",
+      "card-bttns",
+      "left-text"
     );
     moreCard.appendChild(editButton);
 
@@ -235,9 +238,12 @@ function renderTable(users) {
     viewProfile.classList.add(
       "base-button",
       "d-block",
-      "padding-3",
+      "padding-5",
       "font-16",
-      "cursor-pointer"
+      "cursor-pointer",
+      "hover-bg",
+      "card-bttns",
+      "left-text"
     );
     moreCard.appendChild(viewProfile);
 
@@ -246,22 +252,32 @@ function renderTable(users) {
     activeUser.classList.add(
       "base-button",
       "d-block",
-      "padding-3",
+      "padding-5",
       "activate-user-bttn",
       "font-16",
-      "cursor-pointer"
+      "cursor-pointer",
+      "hover-bg",
+      "card-bttns",
+      "left-text"
     );
     moreCard.appendChild(activeUser);
+
+    const hrEl = document.createElement("hr");
+    hrEl.classList.add(".hr");
+    moreCard.appendChild(hrEl);
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
     deleteButton.classList.add(
       "base-button",
       "d-block",
-      "padding-3",
+      "padding-5",
       "delete-bttn",
       "font-16",
-      "cursor-pointer"
+      "cursor-pointer",
+      "hover-bg",
+      "card-bttns",
+      "left-text"
     );
     moreCard.appendChild(deleteButton);
 
@@ -278,7 +294,6 @@ function renderTable(users) {
       "lavender-purple-color",
       "radius-50",
       "remove-card",
-      "padding-3",
       "cursor-pointer"
     );
 
