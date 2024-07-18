@@ -166,7 +166,7 @@ function renderTable(users) {
 
   users.forEach((user) => {
     const contentRow = document.createElement("tr");
-    contentRow.classList.add("base-border", "bg-white");
+    contentRow.classList.add("base-border", "bg-white", "content-row");
 
     updateUser.addEventListener("click", () => {
       filtereUsers("editUser", user);
@@ -178,8 +178,12 @@ function renderTable(users) {
     const checkBox = document.createElement("input");
     checkBox.setAttribute("type", "checkbox");
     td1.appendChild(checkBox);
-    checkBox.classList.add("cursor-pointer");
+    checkBox.classList.add("cursor-pointer", "checkbox");
     contentRow.appendChild(td1);
+
+    checkBox.addEventListener("change", () => {
+      contentRow.classList.toggle("bg-snuff");
+    });
 
     const td2 = document.createElement("td");
     td2.classList.add("cell-padding");
@@ -300,6 +304,10 @@ function renderTable(users) {
     );
     moreCard.appendChild(deleteButton);
 
+    deleteButton.addEventListener("click", () =>
+      deleteUser(contentRow, user.id)
+    );
+
     const cardContainer = document.createElement("div");
     cardContainer.classList.add("hidden", "card-container");
 
@@ -395,6 +403,14 @@ function activeBorder() {
 
 function removeOverflow() {
   body.classList.remove("overflow-hidden");
+}
+
+function deleteUser(userEl, userId) {
+  const confirmDelete = confirm("Are you sure you want to delete this User?");
+  if (confirmDelete) {
+    users = users.filter((user) => user.id !== userId);
+    userEl.remove();
+  }
 }
 
 filter.addEventListener("click", (event) => {
