@@ -175,16 +175,10 @@ function renderTable(users) {
 
     const td1 = document.createElement("td");
     td1.classList.add("cell-padding");
-    const checkedButtonEl = document.createElement("button");
-    td1.appendChild(checkedButtonEl);
-    checkedButtonEl.classList.add(
-      "bi",
-      "bi-square",
-      "font-20",
-      "lavender-purple-color",
-      "base-button",
-      "cursor-pointer"
-    );
+    const checkBox = document.createElement("input");
+    checkBox.setAttribute("type", "checkbox");
+    td1.appendChild(checkBox);
+    checkBox.classList.add("cursor-pointer");
     contentRow.appendChild(td1);
 
     const td2 = document.createElement("td");
@@ -1177,13 +1171,6 @@ updateUser.addEventListener("click", () => {
     removeOverflow();
   }
 });*/
-
-closeModal.addEventListener("click", () => {
-  modal.close();
-  removeOverflow();
-});
-
-renderTable(users);
 
 /*function renderTable(users) {
   table.innerHTML = "";

@@ -116,7 +116,6 @@
     color: var(--lavender-purple);
 }
 
-
 .bg-white {
     background-color: var(--white);
 }
@@ -276,6 +275,14 @@
   input[type=radio] {
     accent-color: var(--blue-marguerite);
   }
+
+  input[type="checkbox"] {
+    width: 20px;
+    height: 20px; 
+    accent-color: var(--blue-marguerite);
+    outline:1px solid var(--Kimberly);
+    outline-offset: -2px;
+   }
 
   .search-bar {
     width: 392px;
