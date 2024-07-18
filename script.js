@@ -482,6 +482,16 @@ updateUser.addEventListener("click", (event) => {
             ? dateInput.value.trim()
             : user["user status"][1],
         ],
+        "payment status": [
+          paymentStatut.value === "Paid"
+            ? "Paid"
+            : paymentStatut.value === "Unpaid"
+            ? "Unpaid"
+            : "Overdue",
+          paymentDate.value.trim()
+            ? paymentDate.value.trim()
+            : user["payment status"][1],
+        ],
         amount: [
           numberInput.value ? `$${numberInput.value}` : user.amount[0],
           user.amount[1],
