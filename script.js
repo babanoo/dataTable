@@ -20,12 +20,14 @@ const searchFiled = document.querySelector(".search-field");
 const modal = document.querySelector(".modal-content");
 const closeModal = document.querySelector(".close-button");
 const body = document.querySelector(".body");
+const updateUser = document.querySelector(".update-user");
 
 const nameInput = document.querySelector("#name");
 const emailInput = document.querySelector("#email");
 const dateInput = document.querySelector("#login");
 const statutInput = document.querySelector("#statut");
 const numberInput = document.querySelector("#number");
+const modalInputs = document.querySelectorAll(".modal-input");
 
 let users = [
   {
@@ -118,6 +120,469 @@ function renderTable(users) {
   headerRow.classList.add("base-border");
   headers.shift();
   console.log(headerRow);
+
+  const th = document.createElement("th");
+  th.classList.add("cell-padding", "left-text");
+  headerRow.appendChild(th);
+  const checkButtonEl = document.createElement("button");
+  checkButtonEl.classList.add(
+    "base-button",
+    "font-20",
+    "lavender-purple-color",
+    "bi",
+    "bi-square",
+    "cursor-pointer"
+  );
+  th.appendChild(checkButtonEl);
+
+  const th2 = document.createElement("th");
+  th2.classList.add("cell-padding", "left-text");
+  th2.textContent = "";
+  headerRow.appendChild(th2);
+
+  for (let header of headers) {
+    const tableHeader = document.createElement("th");
+    tableHeader.classList.add("kimberly-text-color", "font-14");
+    tableHeader.classList.add("cell-padding", "left-text");
+    headerRow.appendChild(tableHeader);
+    tableHeader.textContent = header.toUpperCase();
+  }
+
+  const th3 = document.createElement("th");
+  th3.classList.add("cell-padding", "left-text");
+  const moreButtonEl = document.createElement("button");
+  th3.appendChild(moreButtonEl);
+  moreButtonEl.classList.add(
+    "bi",
+    "bi-three-dots-vertical",
+    "font-20",
+    "lavender-purple-color",
+    "base-button",
+    "cursor-pointer"
+  );
+  headerRow.appendChild(th3);
+
+  table.appendChild(headerRow);
+
+  users.forEach((user) => {
+    const contentRow = document.createElement("tr");
+    contentRow.classList.add("base-border", "bg-white");
+
+    updateUser.addEventListener("click", () => {
+      filtereUsers("editUser", user);
+      removeOverflow();
+    });
+
+    const td1 = document.createElement("td");
+    td1.classList.add("cell-padding");
+    const checkedButtonEl = document.createElement("button");
+    td1.appendChild(checkedButtonEl);
+    checkedButtonEl.classList.add(
+      "bi",
+      "bi-square",
+      "font-20",
+      "lavender-purple-color",
+      "base-button",
+      "cursor-pointer"
+    );
+    contentRow.appendChild(td1);
+
+    const td2 = document.createElement("td");
+    td2.classList.add("cell-padding");
+    const dropDownBttn = document.createElement("button");
+    td2.appendChild(dropDownBttn);
+    dropDownBttn.classList.add(
+      "fa",
+      "fa-chevron-down",
+      "kimberly-text-color",
+      "font-14",
+      "radius-50",
+      "base-button",
+      "drop-down-bttn",
+      "cursor-pointer"
+    );
+    contentRow.appendChild(td2);
+
+    const objValues = Object.values(user);
+    objValues.shift();
+
+    objValues.forEach((el) => {
+      const tableContent = document.createElement("td");
+      tableContent.classList.add("cell-padding");
+      contentRow.appendChild(tableContent);
+      typeof el === "object"
+        ? (tableContent.innerHTML = el.join("<br>"))
+        : (tableContent.textContent = el);
+    });
+
+    const td3 = document.createElement("td");
+    td3.classList.add("cell-padding");
+    const moreBttnEl = document.createElement("button");
+    td3.appendChild(moreBttnEl);
+    moreBttnEl.classList.add(
+      "bi",
+      "bi-three-dots-vertical",
+      "font-20",
+      "lavender-purple-color",
+      "base-button",
+      "cursor-pointer",
+      "view-more-button"
+    );
+
+    moreBttnEl.addEventListener("click", (event) => {
+      const sibling = moreBttnEl.nextElementSibling;
+      sibling.classList.remove("hidden");
+      sibling.classList.add("d-flex");
+    });
+
+    const moreCard = document.createElement("div");
+    moreCard.classList.add("bg-white", "more-card", "box-shadow", "p-relative");
+
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.classList.add(
+      "base-button",
+      "d-block",
+      "padding-5",
+      "font-16",
+      "cursor-pointer",
+      "hover-bg",
+      "card-bttns",
+      "left-text",
+      "edit-buttn"
+    );
+    moreCard.appendChild(editButton);
+
+    editButton.addEventListener("click", (event) => {
+      modal.showModal();
+      body.classList.add("overflow-hidden");
+    });
+
+    const viewProfile = document.createElement("button");
+    viewProfile.textContent = "View Profile";
+    viewProfile.classList.add(
+      "base-button",
+      "d-block",
+      "padding-5",
+      "font-16",
+      "cursor-pointer",
+      "hover-bg",
+      "card-bttns",
+      "left-text"
+    );
+    moreCard.appendChild(viewProfile);
+
+    const activeUser = document.createElement("button");
+    activeUser.textContent = "Activate User";
+    activeUser.classList.add(
+      "base-button",
+      "d-block",
+      "padding-5",
+      "activate-user-bttn",
+      "font-16",
+      "cursor-pointer",
+      "hover-bg",
+      "card-bttns",
+      "left-text"
+    );
+    moreCard.appendChild(activeUser);
+
+    const hrEl = document.createElement("hr");
+    hrEl.classList.add(".hr");
+    moreCard.appendChild(hrEl);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.classList.add(
+      "base-button",
+      "d-block",
+      "padding-5",
+      "delete-bttn",
+      "font-16",
+      "cursor-pointer",
+      "hover-bg",
+      "card-bttns",
+      "left-text"
+    );
+    moreCard.appendChild(deleteButton);
+
+    const cardContainer = document.createElement("div");
+    cardContainer.classList.add("hidden", "card-container");
+
+    cardContainer.appendChild(moreCard);
+
+    const removeCardEl = document.createElement("button");
+    removeCardEl.classList.add(
+      "base-button",
+      "bi",
+      "bi-x",
+      "lavender-purple-color",
+      "radius-50",
+      "remove-card",
+      "cursor-pointer"
+    );
+
+    cardContainer.appendChild(removeCardEl);
+
+    removeCardEl.addEventListener("click", () => {
+      removeCardEl.parentElement.classList.add("hidden");
+    });
+
+    td3.appendChild(cardContainer);
+    contentRow.appendChild(td3);
+    table.appendChild(contentRow);
+  });
+}
+
+function filtereUsers(filterType, userId) {
+  let filteredUsers;
+  switch (filterType) {
+    case "active":
+      filteredUsers = users.filter((user) =>
+        user["user status"].includes("Active")
+      );
+      break;
+    case "inactive":
+      filteredUsers = users.filter((user) =>
+        user["user status"].includes("Inactive")
+      );
+      break;
+    case "paid":
+      filteredUsers = users.filter((user) =>
+        user["payment status"].includes("Paid")
+      );
+      break;
+    case "unpaid":
+      filteredUsers = users.filter((user) =>
+        user["payment status"].includes("Unpaid")
+      );
+      break;
+    case "overdue":
+      filteredUsers = users.filter((user) =>
+        user["payment status"].includes("Overdue")
+      );
+      break;
+    case "searchUsers":
+      const searchInputValue = searchFiled.value.trim().toLowerCase();
+      filteredUsers = users.filter((user) =>
+        user.name[0].toLowerCase().includes(searchInputValue)
+      );
+      break;
+    case "editUser":
+      filteredUsers = users.map((userEl) => {
+        if (userEl.id) {
+          return {
+            ...userEl,
+            name: [nameInput.value.trim(), emailInput.value.trim()],
+          };
+        }
+        return userEl;
+      });
+      break;
+    default:
+      filteredUsers = users;
+  }
+  renderTable(filteredUsers);
+}
+
+function addActiveClass() {
+  for (let activeBttn of addActiveColor) {
+    activeBttn.classList.remove("active", "p-relative");
+    this.classList.add("active", "p-relative", "font-600");
+  }
+}
+
+function activeBorder() {
+  for (let activeEl of addActiveBorder) {
+    this.classList.add("active-border") ||
+      this.classList.replace("base-border", "active-border");
+  }
+}
+
+function removeOverflow() {
+  body.classList.remove("overflow-hidden");
+}
+
+filter.addEventListener("click", (event) => {
+  filterCrud.classList.toggle("hidden");
+});
+
+searchFiled.addEventListener("input", () => filtereUsers("searchUsers"));
+
+searchBar.addEventListener("mouseover", () => {
+  searchFiled.focus();
+});
+searchFiled.addEventListener("blur", () => {
+  searchFiled.value === ""
+    ? searchBar.classList.remove("active-border")
+    : addActiveBorder();
+});
+
+for (let user of allUsers) {
+  user.addEventListener("click", filtereUsers);
+}
+
+for (let active of addActiveColor) {
+  active.addEventListener("click", addActiveClass);
+}
+
+for (let active of addActiveColor) {
+  active.addEventListener("mouseover", addActiveClass);
+}
+
+for (let activeEl of addActiveBorder) {
+  activeEl.addEventListener("mouseover", activeBorder);
+}
+
+paid.addEventListener("click", () => filtereUsers("paid"));
+unpaid.addEventListener("click", () => filtereUsers("unpaid"));
+overdue.addEventListener("click", () => filtereUsers("overdue"));
+
+activeUsers.addEventListener("click", () => filtereUsers("active"));
+inactiveUsers.addEventListener("click", () => filtereUsers("inactive"));
+
+closeModal.addEventListener("click", () => {
+  modal.close();
+  removeOverflow();
+});
+
+/*function editUser(user) {
+  for (let input of modalInputs) {
+    if (input.value.trim() !== "" && input.value !== null) {
+      users = users.map((userEl) => {
+        if (userEl.id === user.id) {
+          return {
+            ...userEl,
+            name: [nameInput.value.trim(), emailInput.value.trim()],
+          };
+        }
+        return userEl;
+      });
+    }
+  }
+  renderTable(users);
+}*/
+
+/*const table = document.querySelector(".table-container");
+
+const paid = document.querySelector(".paid");
+const unpaid = document.querySelector(".unpaid");
+const overdue = document.querySelector(".overdue");
+
+const filter = document.querySelector(".filter-btn");
+const filterCrud = document.querySelector(".filter-crud");
+const allUsers = document.querySelectorAll(".all-users");
+
+const activeUsers = document.querySelector(".active-users");
+const inactiveUsers = document.querySelector(".inactive-users");
+
+const addActiveColor = document.querySelectorAll(".add-active");
+const addActiveBorder = document.querySelectorAll(".add-active-border");
+
+const searchBar = document.querySelector(".search-bar");
+const searchFiled = document.querySelector(".search-field");
+
+const modal = document.querySelector(".modal-content");
+const closeModal = document.querySelector(".close-button");
+const body = document.querySelector(".body");
+const updateUser = document.querySelector(".update-user");
+
+const nameInput = document.querySelector("#name");
+const emailInput = document.querySelector("#email");
+const dateInput = document.querySelector("#login");
+const statutInput = document.querySelector("#statut");
+const numberInput = document.querySelector("#number");
+const modalInputs = document.querySelectorAll(".modal-input");
+
+let users = [
+  {
+    id: "u1",
+    name: "Justin Septimus",
+    email: "example@email.com",
+    "user status": "Active",
+    "payment status": "Paid",
+    amount: "$200",
+  },
+  {
+    id: "u2",
+    name: "Anika Rahiel Madsen",
+    email: "example@email.com",
+    "user status": "Active",
+    "payment status": "Overdue",
+    amount: "$300",
+  },
+  {
+    id: "u3",
+    name: "Miracle Vaccaro",
+    email: "example@email.com",
+    "user status": "Active",
+    "payment status": "Paid",
+    amount: "$250",
+  },
+  {
+    id: "u4",
+    name: "Erin Levin",
+    email: "example@email.com",
+    "user status": "Active",
+    "payment status": "Unpaid",
+    amount: "$200",
+  },
+  {
+    id: "u5",
+    name: "Mira Herwitz",
+    email: "example@email.com",
+    "user status": "Inactive",
+    "payment status": "Paid",
+    amount: "$200",
+  },
+  {
+    id: "u6",
+    name: "Jaxson Siphron",
+    email: "example@email.com",
+    "user status": "Inactive",
+    "payment status": "Paid",
+    amount: "$750",
+  },
+  {
+    id: "u7",
+    name: "Mira Levin",
+    email: "example@email.com",
+    "user status": "Active",
+    "payment status": "Unpaid",
+    amount: "$200",
+  },
+  {
+    id: "u8",
+    name: "LincoIn Levin",
+    email: "example@email.com",
+    "user status": "Active",
+    "payment status": "Paid",
+    amount: "$370",
+  },
+  {
+    id: "u9",
+    name: "Phillip Saris",
+    email: "example@email.com",
+    "user status": "Inactive",
+    "payment status": "Unpaid",
+    amount: "$200",
+  },
+  {
+    id: "u10",
+    name: "Cheyenne Ekstrom Bothman",
+    email: "example@email.com",
+    "user status": "Inactive",
+    "payment status": "Paid",
+    amount: "$150",
+  },
+];
+
+function renderTable(users) {
+  table.innerHTML = "";
+  const headers = Object.keys(users[0]);
+  const headerRow = document.createElement("tr");
+  headerRow.classList.add("base-border");
+  headers.shift();
 
   const th = document.createElement("th");
   th.classList.add("cell-padding", "left-text");
@@ -309,41 +774,62 @@ function renderTable(users) {
     td3.appendChild(cardContainer);
     contentRow.appendChild(td3);
     table.appendChild(contentRow);
+
+    // Handle showing the card container
+    moreBttnEl.addEventListener("click", () => {
+      cardContainer.classList.toggle("hidden");
+    });
+
+    // Handle removing the card container
+    removeMoreCard.addEventListener("click", () => {
+      cardContainer.classList.add("hidden");
+    });
+
+    // Handle editing the user
+    editButton.addEventListener("click", () => {
+      modal.showModal();
+      body.classList.add("overflow-hidden");
+      nameInput.value = user.name;
+      emailInput.value = user.email;
+      currentUserId = user.id; // Set the current user ID
+    });
+
+    // Handle deleting the user
+    deleteButton.addEventListener("click", () => {
+      users = users.filter((u) => u.id !== user.id);
+      renderTable(users);
+    });
   });
 }
 
-function filtereUsers(filterType) {
+function filterUsers(filterType) {
   let filteredUsers;
   switch (filterType) {
     case "active":
-      filteredUsers = users.filter((user) =>
-        user["user status"].includes("Active")
-      );
+      filteredUsers = users.filter((user) => user["user status"] === "Active");
       break;
     case "inactive":
-      filteredUsers = users.filter((user) =>
-        user["user status"].includes("Inactive")
+      filteredUsers = users.filter(
+        (user) => user["user status"] === "Inactive"
       );
       break;
     case "paid":
-      filteredUsers = users.filter((user) =>
-        user["payment status"].includes("Paid")
-      );
+      filteredUsers = users.filter((user) => user["payment status"] === "Paid");
       break;
     case "unpaid":
-      filteredUsers = users.filter((user) =>
-        user["payment status"].includes("Unpaid")
+      filteredUsers = users.filter(
+        (user) => user["payment status"] === "Unpaid"
       );
       break;
     case "overdue":
-      filteredUsers = users.filter((user) =>
-        user["payment status"].includes("Overdue")
+      filteredUsers = users.filter(
+        (user) => user["payment status"] === "Overdue"
       );
       break;
     case "searchUsers":
       const searchInputValue = searchFiled.value.trim().toLowerCase();
       filteredUsers = users.filter((user) =>
-        user.name[0].toLowerCase().includes(searchInputValue)
+        user.name.toLowerCase().includes(searchInputValue)
       );
       break;
     default:
@@ -366,11 +852,15 @@ function activeBorder() {
   }
 }
 
-filter.addEventListener("click", (event) => {
+function removeOverflow() {
+  body.classList.remove("overflow-hidden");
+}
+
+filter.addEventListener("click", () => {
   filterCrud.classList.toggle("hidden");
 });
 
-searchFiled.addEventListener("input", () => filtereUsers("searchUsers"));
+searchFiled.addEventListener("input", () => filterUsers("searchUsers"));
 
 searchBar.addEventListener("mouseover", () => {
   searchFiled.focus();
@@ -382,7 +872,7 @@ searchFiled.addEventListener("blur", () => {
 });
 
 for (let user of allUsers) {
-  user.addEventListener("click", filtereUsers);
+  user.addEventListener("click", () => filterUsers(user.dataset.filterType));
 }
 
 for (let active of addActiveColor) {
@@ -397,39 +887,631 @@ for (let activeEl of addActiveBorder) {
   activeEl.addEventListener("mouseover", activeBorder);
 }
 
-paid.addEventListener("click", () => filtereUsers("paid"));
-unpaid.addEventListener("click", () => filtereUsers("unpaid"));
-overdue.addEventListener("click", () => filtereUsers("overdue"));
+paid.addEventListener("click", () => filterUsers("paid"));
+unpaid.addEventListener("click", () => filterUsers("unpaid"));
+overdue.addEventListener("click", () => filterUsers("overdue"));
 
-activeUsers.addEventListener("click", () => filtereUsers("active"));
-inactiveUsers.addEventListener("click", () => filtereUsers("inactive"));
+activeUsers.addEventListener("click", () => filterUsers("active"));
+inactiveUsers.addEventListener("click", () => filterUsers("inactive"));
 
-const moreBttnEls = document.querySelectorAll(".bi-three-dots-vertical");
-const cardsContainer = document.querySelectorAll(".card-container");
-const removeCardEl = document.querySelectorAll(".remove-card");
-const editButtonEl = document.querySelectorAll(".edit-buttn");
+updateUser.addEventListener("click", () => {
+  const updatedUser = {
+    id: currentUserId,
+    name: nameInput.value.trim(),
+    email: emailInput.value.trim(),
+    "user status": statutInput.value.trim(),
+    "payment status": "Paid", // You might want to change this based on your logic
+    amount: numberInput.value.trim(),
+  };
 
-for (let button of moreBttnEls) {
-  button.addEventListener("click", (event) => {
-    button.nextSibling.classList.remove("hidden");
-    button.nextSibling.classList.add("d-flex");
-  });
-}
-
-for (let removeBttn of removeCardEl) {
-  removeBttn.addEventListener("click", () => {
-    removeBttn.parentElement.classList.add("hidden");
-  });
-}
-
-for (let editBttn of editButtonEl) {
-  editBttn.addEventListener("click", () => {
-    modal.showModal();
-    body.classList.add("overflow-hidden");
-  });
-}
+  users = users.map((user) => (user.id === currentUserId ? updatedUser : user));
+  renderTable(users);
+  modal.close();
+  removeOverflow();
+});
 
 closeModal.addEventListener("click", () => {
   modal.close();
-  body.classList.remove("overflow-hidden");
+  removeOverflow();
 });
+
+renderTable(users);
+
+/*const table = document.querySelector(".table-container");
+
+const paid = document.querySelector(".paid");
+const unpaid = document.querySelector(".unpaid");
+const overdue = document.querySelector(".overdue");
+
+const filter = document.querySelector(".filter-btn");
+const filterCrud = document.querySelector(".filter-crud");
+const allUsers = document.querySelectorAll(".all-users");
+
+const activeUsers = document.querySelector(".active-users");
+const inactiveUsers = document.querySelector(".inactive-users");
+
+const addActiveColor = document.querySelectorAll(".add-active");
+const addActiveBorder = document.querySelectorAll(".add-active-border");
+
+const searchBar = document.querySelector(".search-bar");
+const searchFiled = document.querySelector(".search-field");
+
+const modal = document.querySelector(".modal-content");
+const closeModal = document.querySelector(".close-button");
+const body = document.querySelector(".body");
+const updateUser = document.querySelector(".update-user");
+
+const nameInput = document.querySelector("#name");
+const emailInput = document.querySelector("#email");
+const dateInput = document.querySelector("#login");
+const statutInput = document.querySelector("#statut");
+const numberInput = document.querySelector("#number");
+const modalInputs = document.querySelectorAll(".modal-input");
+
+let currentUserId = null;
+
+let users = [
+  {
+    id: "u1",
+    name: "Justin Septimus",
+    email: "example@email.com",
+    "user status": "Active",
+    "payment status": "Paid",
+    amount: "$200",
+    "": "View More",
+  },
+  {
+    id: "u2",
+    name: "Anika Rahiel Madsen",
+    email: "example@email.com",
+    "user status": "Active",
+    "payment status": "Overdue",
+    amount: "$300",
+    "": "View More",
+  },
+  {
+    id: "u3",
+    name: "Miracle Vaccaro",
+    email: "example@email.com",
+    "user status": "Active",
+    "payment status": "Paid",
+    amount: "$250",
+    "": "View More",
+  },
+  {
+    id: "u4",
+    name: "Erin Levin",
+    email: "example@email.com",
+    "user status": "Active",
+    "payment status": "Unpaid",
+    amount: "$200",
+    "": "View More",
+  },
+  {
+    id: "u5",
+    name: "Mira Herwitz",
+    email: "example@email.com",
+    "user status": "Inactive",
+    "payment status": "Paid",
+    amount: "$200",
+    "": "View More",
+  },
+  {
+    id: "u6",
+    name: "Jaxson Siphron",
+    email: "example@email.com",
+    "user status": "Inactive",
+    "payment status": "Paid",
+    amount: "$750",
+    "": "View More",
+  },
+  {
+    id: "u7",
+    name: "Mira Levin",
+    email: "example@email.com",
+    "user status": "Active",
+    "payment status": "Unpaid",
+    amount: "$200",
+    "": "View More",
+  },
+  {
+    id: "u8",
+    name: "LincoIn Levin",
+    email: "example@email.com",
+    "user status": "Active",
+    "payment status": "Paid",
+    amount: "$370",
+    "": "View More",
+  },
+  {
+    id: "u9",
+    name: "Phillip Saris",
+    email: "example@email.com",
+    "user status": "Inactive",
+    "payment status": "Unpaid",
+    amount: "$200",
+    "": "View More",
+  },
+  {
+    id: "u10",
+    name: "Cheyenne Ekstrom Bothman",
+    email: "example@email.com",
+    "user status": "Inactive",
+    "payment status": "Paid",
+    amount: "$150",
+    "": "View More",
+  },
+];
+
+
+
+    
+
+function filterUsers(filterType) {
+  let filteredUsers;
+  switch (filterType) {
+    case "active":
+      filteredUsers = users.filter((user) => user["user status"] === "Active");
+      break;
+    case "inactive":
+      filteredUsers = users.filter(
+        (user) => user["user status"] === "Inactive"
+      );
+      break;
+    case "paid":
+      filteredUsers = users.filter((user) => user["payment status"] === "Paid");
+      break;
+    case "unpaid":
+      filteredUsers = users.filter(
+        (user) => user["payment status"] === "Unpaid"
+      );
+      break;
+    case "overdue":
+      filteredUsers = users.filter(
+        (user) => user["payment status"] === "Overdue"
+      );
+      break;
+    case "searchUsers":
+      const searchInputValue = searchFiled.value.trim().toLowerCase();
+      filteredUsers = users.filter((user) =>
+        user.name.toLowerCase().includes(searchInputValue)
+      );
+      break;
+    default:
+      filteredUsers = users;
+  }
+  renderTable(filteredUsers);
+}
+
+function addActiveClass() {
+  let activeBttn = document.querySelector(".active");
+  if (activeBttn) {
+    activeBttn.classList.remove("active", "p-relative");
+    this.classList.add("active", "p-relative", "font-600");
+  }
+}
+
+function activeBorder() {
+  for (let activeEl of addActiveBorder) {
+    this.classList.add("active-border") ||
+      this.classList.replace("base-border", "active-border");
+  }
+}
+
+function removeOverflow() {
+  body.classList.remove("overflow-hidden");
+}
+
+filter.addEventListener("click", () => {
+  filterCrud.classList.toggle("hidden");
+});
+
+searchFiled.addEventListener("input", () => filterUsers("searchUsers"));
+
+searchBar.addEventListener("mouseover", () => {
+  searchFiled.focus();
+});
+searchFiled.addEventListener("blur", () => {
+  searchFiled.value === ""
+    ? searchBar.classList.remove("active-border")
+    : addActiveBorder();
+});
+
+for (let user of allUsers) {
+  user.addEventListener("click", () => filterUsers(user.dataset.filterType));
+}
+
+for (let active of addActiveColor) {
+  active.addEventListener("click", addActiveClass);
+}
+
+for (let active of addActiveColor) {
+  active.addEventListener("mouseover", addActiveClass);
+}
+
+for (let activeEl of addActiveBorder) {
+  activeEl.addEventListener("mouseover", activeBorder);
+}
+
+paid.addEventListener("click", () => filterUsers("paid"));
+unpaid.addEventListener("click", () => filterUsers("unpaid"));
+overdue.addEventListener("click", () => filterUsers("overdue"));
+
+activeUsers.addEventListener("click", () => filterUsers("active"));
+inactiveUsers.addEventListener("click", () => filterUsers("inactive"));
+
+updateUser.addEventListener("click", () => {
+  const updatedUser = {
+    id: currentUserId,
+    name:
+      nameInput.value.trim() ||
+      users.find((user) => user.id === currentUserId).name,
+    email:
+      emailInput.value.trim() ||
+      users.find((user) => user.id === currentUserId).email,
+    "user status":
+      statutInput.value.trim() ||
+      users.find((user) => user.id === currentUserId)["user status"],
+    "payment status": users.find((user) => user.id === currentUserId)[
+      "payment status"
+    ], // Assume payment status is not updated in this form
+    amount:
+      numberInput.value.trim() ||
+      users.find((user) => user.id === currentUserId).amount,
+  };
+
+  users = users.map((user) => (user.id === currentUserId ? updatedUser : user));
+  renderTable(users);
+  modal.close();
+  removeOverflow();
+});
+
+// Handle activating the user from the modal
+/*activateUserBtn.addEventListener("click", () => {
+  if (currentUserId !== null) {
+    users = users.map((user) =>
+      user.id === currentUserId ? { ...user, "user status": "Active" } : user
+    );
+    renderTable(users);
+    modal.close();
+    removeOverflow();
+  }
+});*/
+
+closeModal.addEventListener("click", () => {
+  modal.close();
+  removeOverflow();
+});
+
+renderTable(users);
+
+/*function renderTable(users) {
+  table.innerHTML = "";
+  const headers = Object.keys(users[0]);
+  const headerRow = document.createElement("tr");
+  headerRow.classList.add("base-border");
+  headers.shift();
+
+  const th = document.createElement("th");
+  th.classList.add("cell-padding", "left-text");
+  headerRow.appendChild(th);
+  const checkButtonEl = document.createElement("button");
+  checkButtonEl.classList.add(
+    "base-button",
+    "font-20",
+    "lavender-purple-color",
+    "bi",
+    "bi-square",
+    "cursor-pointer"
+  );
+  th.appendChild(checkButtonEl);
+
+  const th2 = document.createElement("th");
+  th2.classList.add("cell-padding", "left-text");
+  th2.textContent = "";
+  headerRow.appendChild(th2);
+
+  for (let header of headers) {
+    const tableHeader = document.createElement("th");
+    tableHeader.classList.add("kimberly-text-color", "font-14");
+    tableHeader.classList.add("cell-padding", "left-text");
+    headerRow.appendChild(tableHeader);
+    tableHeader.textContent = header.toUpperCase();
+  }
+
+  const th3 = document.createElement("th");
+  th3.classList.add("cell-padding", "left-text");
+  const moreButtonEl = document.createElement("button");
+  th3.appendChild(moreButtonEl);
+  moreButtonEl.classList.add(
+    "bi",
+    "bi-three-dots-vertical",
+    "font-20",
+    "lavender-purple-color",
+    "base-button",
+    "cursor-pointer"
+  );
+  headerRow.appendChild(th3);
+
+  table.appendChild(headerRow);
+
+  users.forEach((user) => {
+    const contentRow = document.createElement("tr");
+    contentRow.classList.add("base-border", "bg-white");
+
+    const td1 = document.createElement("td");
+    td1.classList.add("cell-padding");
+    const checkedButtonEl = document.createElement("button");
+    td1.appendChild(checkedButtonEl);
+    checkedButtonEl.classList.add(
+      "bi",
+      "bi-square",
+      "font-20",
+      "lavender-purple-color",
+      "base-button",
+      "cursor-pointer"
+    );
+    contentRow.appendChild(td1);
+
+    const td2 = document.createElement("td");
+    td2.classList.add("cell-padding");
+    const dropDownBttn = document.createElement("button");
+    td2.appendChild(dropDownBttn);
+    dropDownBttn.classList.add(
+      "fa",
+      "fa-chevron-down",
+      "kimberly-text-color",
+      "font-14",
+      "radius-50",
+      "base-button",
+      "drop-down-bttn",
+      "cursor-pointer"
+    );
+    contentRow.appendChild(td2);
+
+    const objValues = Object.values(user);
+    objValues.shift();
+
+    objValues.forEach((el) => {
+      const tableContent = document.createElement("td");
+      tableContent.classList.add("cell-padding");
+      contentRow.appendChild(tableContent);
+      typeof el === "object"
+        ? (tableContent.innerHTML = el.join("<br>"))
+        : (tableContent.textContent = el);
+    });
+
+    const td3 = document.createElement("td");
+    td3.classList.add("cell-padding");
+    const moreBttnEl = document.createElement("button");
+    td3.appendChild(moreBttnEl);
+    moreBttnEl.classList.add(
+      "bi",
+      "bi-three-dots-vertical",
+      "font-20",
+      "lavender-purple-color",
+      "base-button",
+      "cursor-pointer",
+      "view-more-button"
+    );
+
+    const moreCard = document.createElement("div");
+    moreCard.classList.add("bg-white", "more-card", "box-shadow", "p-relative");
+
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.classList.add(
+      "base-button",
+      "d-block",
+      "padding-5",
+      "font-16",
+      "cursor-pointer",
+      "hover-bg",
+      "card-bttns",
+      "left-text",
+      "edit-buttn"
+    );
+    moreCard.appendChild(editButton);
+
+    const viewProfile = document.createElement("button");
+    viewProfile.textContent = "View Profile";
+    viewProfile.classList.add(
+      "base-button",
+      "d-block",
+      "padding-5",
+      "font-16",
+      "cursor-pointer",
+      "hover-bg",
+      "card-bttns",
+      "left-text"
+    );
+    moreCard.appendChild(viewProfile);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.classList.add(
+      "base-button",
+      "d-block",
+      "padding-5",
+      "delete-bttn",
+      "font-16",
+      "cursor-pointer",
+      "hover-bg",
+      "card-bttns",
+      "left-text"
+    );
+    moreCard.appendChild(deleteButton);
+
+    const cardContainer = document.createElement("div");
+    cardContainer.classList.add("hidden", "card-container");
+
+    cardContainer.appendChild(moreCard);
+
+    const removeMoreCard = document.createElement("button");
+    removeMoreCard.classList.add(
+      "base-button",
+      "bi",
+      "bi-x",
+      "lavender-purple-color",
+      "radius-50",
+      "remove-card",
+      "cursor-pointer"
+    );
+
+    cardContainer.appendChild(removeMoreCard);
+
+    td3.appendChild(cardContainer);
+    contentRow.appendChild(td3);
+    table.appendChild(contentRow);
+
+    // Handle showing the card container
+    moreBttnEl.addEventListener("click", () => {
+      cardContainer.classList.toggle("hidden");
+    });
+
+    // Handle removing the card container
+    removeMoreCard.addEventListener("click", () => {
+      cardContainer.classList.add("hidden");
+    });
+
+    // Handle editing the user
+    editButton.addEventListener("click", () => {
+      modal.showModal();
+      body.classList.add("overflow-hidden");
+      nameInput.value = user.name;
+      emailInput.value = user.email;
+      currentUserId = user.id; // Set the current user ID
+    });
+
+    // Handle deleting the user
+    deleteButton.addEventListener("click", () => {
+      users = users.filter((u) => u.id !== user.id);
+      renderTable(users);
+    });
+  });
+}
+
+function filterUsers(filterType) {
+  let filteredUsers;
+  switch (filterType) {
+    case "active":
+      filteredUsers = users.filter((user) => user["user status"] === "Active");
+      break;
+    case "inactive":
+      filteredUsers = users.filter(
+        (user) => user["user status"] === "Inactive"
+      );
+      break;
+    case "paid":
+      filteredUsers = users.filter((user) => user["payment status"] === "Paid");
+      break;
+    case "unpaid":
+      filteredUsers = users.filter(
+        (user) => user["payment status"] === "Unpaid"
+      );
+      break;
+    case "overdue":
+      filteredUsers = users.filter(
+        (user) => user["payment status"] === "Overdue"
+      );
+      break;
+    case "searchUsers":
+      const searchInputValue = searchFiled.value.trim().toLowerCase();
+      filteredUsers = users.filter((user) =>
+        user.name.toLowerCase().includes(searchInputValue)
+      );
+      break;
+    default:
+      filteredUsers = users;
+  }
+  renderTable(filteredUsers);
+}
+
+function addActiveClass() {
+  for (let activeBttn of addActiveColor) {
+    activeBttn.classList.remove("active", "p-relative");
+    this.classList.add("active", "p-relative", "font-600");
+  }
+}
+
+function activeBorder() {
+  for (let activeEl of addActiveBorder) {
+    this.classList.add("active-border") ||
+      this.classList.replace("base-border", "active-border");
+  }
+}
+
+function removeOverflow() {
+  body.classList.remove("overflow-hidden");
+}
+
+filter.addEventListener("click", () => {
+  filterCrud.classList.toggle("hidden");
+});
+
+searchFiled.addEventListener("input", () => filterUsers("searchUsers"));
+
+searchBar.addEventListener("mouseover", () => {
+  searchFiled.focus();
+});
+searchFiled.addEventListener("blur", () => {
+  searchFiled.value === ""
+    ? searchBar.classList.remove("active-border")
+    : addActiveBorder();
+});
+
+for (let user of allUsers) {
+  user.addEventListener("click", () => filterUsers(user.dataset.filterType));
+}
+
+for (let active of addActiveColor) {
+  active.addEventListener("click", addActiveClass);
+}
+
+for (let active of addActiveColor) {
+  active.addEventListener("mouseover", addActiveClass);
+}
+
+for (let activeEl of addActiveBorder) {
+  activeEl.addEventListener("mouseover", activeBorder);
+}
+
+paid.addEventListener("click", () => filterUsers("paid"));
+unpaid.addEventListener("click", () => filterUsers("unpaid"));
+overdue.addEventListener("click", () => filterUsers("overdue"));
+
+activeUsers.addEventListener("click", () => filterUsers("active"));
+inactiveUsers.addEventListener("click", () => filterUsers("inactive"));
+
+updateUser.addEventListener("click", () => {
+  const updatedUser = {
+    id: currentUserId,
+    name:
+      nameInput.value.trim() ||
+      users.find((user) => user.id === currentUserId).name,
+    email:
+      emailInput.value.trim() ||
+      users.find((user) => user.id === currentUserId).email,
+    "user status":
+      statutInput.value.trim() ||
+      users.find((user) => user.id === currentUserId)["user status"],
+    "payment status": users.find((user) => user.id === currentUserId)[
+      "payment status"
+    ], // Assume payment status is not updated in this form
+    amount:
+      numberInput.value.trim() ||
+      users.find((user) => user.id === currentUserId).amount,
+  };
+
+  users = users.map((user) => (user.id === currentUserId ? updatedUser : user));
+  renderTable(users);
+  modal.close();
+  removeOverflow();
+});
+
+closeModal.addEventListener("click", () => {
+  modal.close();
+  removeOverflow();
+});
+
+renderTable(users);*/

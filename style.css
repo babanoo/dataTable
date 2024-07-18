@@ -415,6 +415,10 @@
     padding: 15px 0;
 }
 
+.red {
+    color: red;
+}
+
 .select-num-page {
     appearance: none; 
     -webkit-appearance: none;
