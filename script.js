@@ -24,8 +24,10 @@ const updateUser = document.querySelector(".update-user");
 
 const nameInput = document.querySelector("#name");
 const emailInput = document.querySelector("#email");
+const paymentDate = document.querySelector("#date-payment");
 const dateInput = document.querySelector("#login");
 const statutInput = document.querySelector("#statut");
+const paymentStatut = document.querySelector("#payment-statut");
 const numberInput = document.querySelector("#number");
 const modalInputs = document.querySelectorAll(".modal-input");
 
@@ -259,8 +261,16 @@ function renderTable(users) {
       nameInput.value = user.name[0];
       emailInput.value = user.name[1];
       dateInput.value = user["user status"][1];
+      paymentDate.value = user["payment status"][1];
       statutInput.value =
         user["user status"][0] === "Active" ? "active" : "inactive";
+      if (user["payment status"][0] === "Paid") {
+        paymentStatut.value = "Paid";
+      } else if (user["payment status"][0] === "Unpaid") {
+        paymentStatut.value = "UnPaid";
+      } else {
+        paymentStatut.value = "Overdue";
+      }
       numberInput.value = parseFloat(user.amount[0].replace("$", ""));
       currentUserId = user.id;
     });

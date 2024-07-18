@@ -107,6 +107,14 @@
     font-weight: 400;
 }
 
+.width-180 {
+    width: 180px;
+ }
+
+ .width-250 {
+    width: 250px;
+ }
+
 .kimberly-text-color {
     color: var(--Kimberly);
 }
@@ -214,6 +222,10 @@
 
 .mr-15 {
     margin-right: 15px;
+}
+
+.mr-28 {
+    margin-right: 28px;
 }
 
 .pr-25 {
@@ -386,10 +398,10 @@
 }
 
  .modal-content {
-    width: 580px;
+    width: 600px;
     height: 400px;
     border-radius: 10px;
-    padding: 18px 10px 15px;
+    padding: 28px 10px 15px;
     position: absolute;
     top: 40%;
     transform: translateY(-15%);
@@ -401,6 +413,12 @@
 
 .modal-content::backdrop {
     background-color: var(--overlay);
+}
+
+.close-button {
+  position: absolute;
+  left: 95%;
+  top: 2%;
 }
 
 .close-button:hover {
@@ -422,7 +440,6 @@
 .modal-input {
     border-radius: 22px;
     margin: 5px 0 20px;
-    width: 220px;
     height: 38px;
     padding: 0 5px;
     outline: none;
