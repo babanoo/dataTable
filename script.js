@@ -267,7 +267,7 @@ function renderTable(users) {
       if (user["payment status"][0] === "Paid") {
         paymentStatut.value = "Paid";
       } else if (user["payment status"][0] === "Unpaid") {
-        paymentStatut.value = "UnPaid";
+        paymentStatut.value = "Unpaid";
       } else {
         paymentStatut.value = "Overdue";
       }
