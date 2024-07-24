@@ -33,7 +33,7 @@ const modalInputs = document.querySelectorAll(".modal-input");
 
 let currentUserId = null;
 
-let users = [
+let users = JSON.parse(localStorage.getItem("users")) || [
   {
     id: "u1",
     name: ["Justin Septimus", "example@email.com"],
@@ -123,10 +123,9 @@ function renderTable(users) {
   const headerRow = document.createElement("tr");
   headerRow.classList.add("base-border");
   headers.shift();
-  console.log(headerRow);
 
   const th = document.createElement("th");
-  th.classList.add("cell-padding", "left-text");
+  th.classList.add("left-text");
   headerRow.appendChild(th);
   const checkButtonEl = document.createElement("button");
   checkButtonEl.classList.add(
@@ -135,25 +134,32 @@ function renderTable(users) {
     "lavender-purple-color",
     "bi",
     "bi-square",
-    "cursor-pointer"
+    "cursor-pointer",
+    "cheked-buttn",
+    "cell-header-padding"
   );
   th.appendChild(checkButtonEl);
 
   const th2 = document.createElement("th");
-  th2.classList.add("cell-padding", "left-text");
+  th2.classList.add("left-text", "cell-header-padding");
   th2.textContent = "";
   headerRow.appendChild(th2);
 
   for (let header of headers) {
     const tableHeader = document.createElement("th");
-    tableHeader.classList.add("kimberly-text-color", "font-14");
-    tableHeader.classList.add("cell-padding", "left-text");
+    tableHeader.classList.add(
+      "kimberly-text-color",
+      "font-14",
+      "font-600",
+      "cell-header-padding",
+      "left-text"
+    );
     headerRow.appendChild(tableHeader);
     tableHeader.textContent = header.toUpperCase();
   }
 
   const th3 = document.createElement("th");
-  th3.classList.add("cell-padding", "left-text");
+  th3.classList.add("cell-header-padding", "left-text");
   const moreButtonEl = document.createElement("button");
   th3.appendChild(moreButtonEl);
   moreButtonEl.classList.add(
@@ -170,7 +176,12 @@ function renderTable(users) {
 
   users.forEach((user) => {
     const contentRow = document.createElement("tr");
-    contentRow.classList.add("base-border", "bg-white", "content-row");
+    contentRow.classList.add(
+      "base-border",
+      "bg-white",
+      "content-row",
+      "p-relative"
+    );
 
     updateUser.addEventListener("click", () => {
       filtereUsers("editUser", user);
@@ -182,12 +193,8 @@ function renderTable(users) {
     const checkBox = document.createElement("input");
     checkBox.setAttribute("type", "checkbox");
     td1.appendChild(checkBox);
-    checkBox.classList.add("cursor-pointer", "checkbox");
+    checkBox.classList.add("cursor-pointer", "check-box", "mb-5");
     contentRow.appendChild(td1);
-
-    checkBox.addEventListener("change", () => {
-      contentRow.classList.toggle("bg-snuff");
-    });
 
     const td2 = document.createElement("td");
     td2.classList.add("cell-padding");
@@ -201,7 +208,8 @@ function renderTable(users) {
       "radius-50",
       "base-button",
       "drop-down-bttn",
-      "cursor-pointer"
+      "cursor-pointer",
+      "mb-5"
     );
     contentRow.appendChild(td2);
 
@@ -210,11 +218,82 @@ function renderTable(users) {
 
     objValues.forEach((el) => {
       const tableContent = document.createElement("td");
-      tableContent.classList.add("cell-padding");
+      tableContent.classList.add(
+        "cell-padding",
+        "kimberly-text-color",
+        "font-14"
+      );
       contentRow.appendChild(tableContent);
-      typeof el === "object"
-        ? (tableContent.innerHTML = el.join("<br>"))
-        : (tableContent.textContent = el);
+
+      if (typeof el === "object") {
+        el.forEach((item) => {
+          const spanEl = document.createElement("span");
+          spanEl.classList.add("d-block", "mb-5");
+
+          if (item === "Active") {
+            spanEl.classList.add(
+              "active-user",
+              "d-inline-block",
+              "bg-snuff",
+              "p-relative",
+              "font-500",
+              "radius-15",
+              "status-padding"
+            );
+          } else if (item === "Inactive") {
+            spanEl.classList.add(
+              "inactive-user",
+              "d-inline-block",
+              "p-relative",
+              "font-500",
+              "radius-15",
+              "status-padding"
+            );
+          } else if (item === "Paid") {
+            spanEl.classList.add(
+              "paid-user",
+              "d-inline-block",
+              "p-relative",
+              "font-500",
+              "radius-15",
+              "status-padding"
+            );
+          } else if (item === "Overdue") {
+            spanEl.classList.add(
+              "overdue-user",
+              "d-inline-block",
+              "p-relative",
+              "font-500",
+              "radius-15",
+              "status-padding"
+            );
+          } else if (item === "Unpaid") {
+            spanEl.classList.add(
+              "unpaid-user",
+              "d-inline-block",
+              "p-relative",
+              "font-500",
+              "radius-15",
+              "status-padding"
+            );
+          } else if (
+            item === objValues[0][0] ||
+            item === objValues[3][0] ||
+            item === objValues[2][1]
+          ) {
+            spanEl.classList.add("font-500", "black-text");
+          } else if (item === objValues[1][1] || item === objValues[1][0]) {
+            tableContent.classList.add("cell-space-35");
+          } else if (item === objValues[3][1] || item === objValues[3][0]) {
+            tableContent.classList.add("right-text", "cell-space-10");
+          }
+          spanEl.textContent = item;
+          tableContent.appendChild(spanEl);
+          console.log(tableContent);
+        });
+      } else {
+        tableContent.textContent = el;
+      }
     });
 
     const td3 = document.createElement("td");
@@ -226,6 +305,7 @@ function renderTable(users) {
       "bi-three-dots-vertical",
       "font-20",
       "lavender-purple-color",
+      "mb-5",
       "base-button",
       "cursor-pointer",
       "view-more-button"
@@ -306,8 +386,9 @@ function renderTable(users) {
 
     activeUser.addEventListener("click", () => {
       user["user status"][0] =
-        user["user status"][0] === "Inactive" ? "Active" : "Inactive";
+        user["user status"][0] === "Inactive" ? "Active" : "Active";
       renderTable(users);
+      addTaskToLocalStorage();
     });
 
     const hrEl = document.createElement("hr");
@@ -360,6 +441,65 @@ function renderTable(users) {
     table.appendChild(contentRow);
   });
 }
+
+const checkBoxes = document.querySelectorAll(".check-box");
+const checkedButtn = document.querySelector(".cheked-buttn");
+
+function updateButtonState() {
+  const allChecked = Array.from(checkBoxes).every(
+    (checkbox) => checkbox.checked
+  );
+  const someChecked = Array.from(checkBoxes).some(
+    (checkbox) => checkbox.checked
+  );
+
+  if (allChecked) {
+    checkedButtn.classList.remove("bi-dash-square-fill", "bi-square");
+    checkedButtn.classList.add("bi-check-square-fill", "blue-marguarite");
+  } else if (someChecked) {
+    checkedButtn.classList.remove("bi-square", "bi-check-square-fill");
+    checkedButtn.classList.add("bi-dash-square-fill", "blue-marguarite");
+  } else {
+    checkedButtn.classList.remove(
+      "bi-dash-square-fill",
+      "bi-check-square-fill",
+      "blue-marguarite"
+    );
+    checkedButtn.classList.add("bi-square");
+  }
+}
+
+for (let check of checkBoxes) {
+  check.addEventListener("change", () => {
+    updateButtonState();
+    check.parentElement.parentElement.classList.toggle("bg-snuff");
+  });
+}
+
+checkedButtn.addEventListener("click", () => {
+  const allChecked = Array.from(checkBoxes).every(
+    (checkbox) => checkbox.checked
+  );
+
+  const someChecked = Array.from(checkBoxes).some(
+    (checkbox) => checkbox.checked
+  );
+
+  if (allChecked || someChecked) {
+    for (let check of checkBoxes) {
+      check.checked = false;
+      check.parentElement.parentElement.classList.remove("bg-snuff");
+    }
+  } else if (!allChecked) {
+    for (let check of checkBoxes) {
+      check.checked = true;
+      check.parentElement.parentElement.classList.add("bg-snuff");
+    }
+  }
+
+  updateButtonState();
+});
+updateButtonState();
 
 function filtereUsers(filterType) {
   let filteredUsers;
@@ -425,6 +565,7 @@ function deleteUser(userEl, userId) {
     users = users.filter((user) => user.id !== userId);
     userEl.remove();
   }
+  addTaskToLocalStorage();
 }
 
 filter.addEventListener("click", (event) => {
@@ -502,6 +643,7 @@ updateUser.addEventListener("click", (event) => {
   });
 
   renderTable(users);
+  addTaskToLocalStorage();
   modal.close();
   body.classList.remove("overflow-hidden");
 });
@@ -510,3 +652,7 @@ closeModal.addEventListener("click", () => {
   modal.close();
   removeOverflow();
 });
+
+function addTaskToLocalStorage() {
+  window.localStorage.setItem("users", JSON.stringify(users));
+}
