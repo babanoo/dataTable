@@ -496,7 +496,6 @@ checkedButtn.addEventListener("click", () => {
       check.parentElement.parentElement.classList.add("bg-snuff");
     }
   }
-
   updateButtonState();
 });
 updateButtonState();
@@ -566,6 +565,10 @@ function deleteUser(userEl, userId) {
     userEl.remove();
   }
   addTaskToLocalStorage();
+}
+
+function addTaskToLocalStorage() {
+  window.localStorage.setItem("users", JSON.stringify(users));
 }
 
 filter.addEventListener("click", (event) => {
@@ -652,7 +655,3 @@ closeModal.addEventListener("click", () => {
   modal.close();
   removeOverflow();
 });
-
-function addTaskToLocalStorage() {
-  window.localStorage.setItem("users", JSON.stringify(users));
-}
