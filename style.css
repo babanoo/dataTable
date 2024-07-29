@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 :root {
     --white: #FFFFFF;
     --Red: #D30000;
@@ -19,12 +25,6 @@
     --overlay: #000000b1;
     --black: #000000;
   }
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
  th:nth-child(6)  {
     text-align: right;
