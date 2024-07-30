@@ -449,7 +449,7 @@
 
 .card-container {
     position: absolute;
-    transform: translateY(-12px);
+    transform: translateY(-18px);
     left: 84%;
     z-index: 3;
 }

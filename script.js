@@ -31,6 +31,8 @@ const paymentStatut = document.querySelector("#payment-statut");
 const numberInput = document.querySelector("#number");
 const modalInputs = document.querySelectorAll(".modal-input");
 
+const payableAmount = document.querySelector(".payable-amount");
+
 let currentUserId = null;
 
 let users = JSON.parse(localStorage.getItem("users")) || [
@@ -354,6 +356,15 @@ function renderTable(users) {
       numberInput.value = parseFloat(user.amount[0].replace("$", ""));
       currentUserId = user.id;
     });
+
+    const amounts = users.map((user) =>
+      parseFloat(user.amount[0].replace("$", ""))
+    );
+    const totalAmount = amounts.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue;
+    }, 0);
+
+    payableAmount.textContent = totalAmount;
 
     const viewProfile = document.createElement("button");
     viewProfile.textContent = "View Profile";
