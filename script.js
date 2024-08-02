@@ -380,27 +380,29 @@ function renderTable(users) {
     );
     moreCard.appendChild(viewProfile);
 
-    const activeUser = document.createElement("button");
-    activeUser.textContent = "Activate User";
-    activeUser.classList.add(
-      "base-button",
-      "d-block",
-      "padding-5",
-      "activate-user-bttn",
-      "font-16",
-      "cursor-pointer",
-      "hover-bg",
-      "card-bttns",
-      "left-text"
-    );
-    moreCard.appendChild(activeUser);
+    if (user["user status"][0] === "Inactive") {
+      const activeUser = document.createElement("button");
+      activeUser.textContent = "Activate User";
+      activeUser.classList.add(
+        "base-button",
+        "d-block",
+        "padding-5",
+        "activate-user-bttn",
+        "font-16",
+        "cursor-pointer",
+        "hover-bg",
+        "card-bttns",
+        "left-text"
+      );
+      moreCard.appendChild(activeUser);
 
-    activeUser.addEventListener("click", () => {
-      user["user status"][0] =
-        user["user status"][0] === "Inactive" ? "Active" : "Active";
-      renderTable(users);
-      addTaskToLocalStorage();
-    });
+      activeUser.addEventListener("click", () => {
+        user["user status"][0] =
+          user["user status"][0] === "Inactive" ? "Active" : "Active";
+        renderTable(users);
+        addTaskToLocalStorage();
+      });
+    }
 
     const hrEl = document.createElement("hr");
     hrEl.classList.add(".hr");
