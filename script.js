@@ -453,65 +453,64 @@ function renderTable(users) {
     contentRow.appendChild(td3);
     table.appendChild(contentRow);
   });
-}
 
-const checkBoxes = document.querySelectorAll(".check-box");
-const checkedButtn = document.querySelector(".cheked-buttn");
+  const checkBoxes = document.querySelectorAll(".check-box");
+  const checkedButtn = document.querySelector(".cheked-buttn");
 
-function updateButtonState() {
-  const allChecked = Array.from(checkBoxes).every(
-    (checkbox) => checkbox.checked
-  );
-  const someChecked = Array.from(checkBoxes).some(
-    (checkbox) => checkbox.checked
-  );
-
-  if (allChecked) {
-    checkedButtn.classList.remove("bi-dash-square-fill", "bi-square");
-    checkedButtn.classList.add("bi-check-square-fill", "blue-marguarite");
-  } else if (someChecked) {
-    checkedButtn.classList.remove("bi-square", "bi-check-square-fill");
-    checkedButtn.classList.add("bi-dash-square-fill", "blue-marguarite");
-  } else {
-    checkedButtn.classList.remove(
-      "bi-dash-square-fill",
-      "bi-check-square-fill",
-      "blue-marguarite"
+  function updateButtonState() {
+    const allChecked = Array.from(checkBoxes).every(
+      (checkbox) => checkbox.checked
     );
-    checkedButtn.classList.add("bi-square");
-  }
-}
+    const someChecked = Array.from(checkBoxes).some(
+      (checkbox) => checkbox.checked
+    );
 
-for (let check of checkBoxes) {
-  check.addEventListener("change", () => {
+    if (allChecked) {
+      checkedButtn.classList.remove("bi-dash-square-fill", "bi-square");
+      checkedButtn.classList.add("bi-check-square-fill", "blue-marguarite");
+    } else if (someChecked) {
+      checkedButtn.classList.remove("bi-square", "bi-check-square-fill");
+      checkedButtn.classList.add("bi-dash-square-fill", "blue-marguarite");
+    } else {
+      checkedButtn.classList.remove(
+        "bi-dash-square-fill",
+        "bi-check-square-fill",
+        "blue-marguarite"
+      );
+      checkedButtn.classList.add("bi-square");
+    }
+  }
+
+  for (let check of checkBoxes) {
+    check.addEventListener("change", () => {
+      updateButtonState();
+      check.parentElement.parentElement.classList.toggle("bg-snuff");
+    });
+  }
+
+  checkedButtn.addEventListener("click", () => {
+    const allChecked = Array.from(checkBoxes).every(
+      (checkbox) => checkbox.checked
+    );
+
+    const someChecked = Array.from(checkBoxes).some(
+      (checkbox) => checkbox.checked
+    );
+
+    if (allChecked || someChecked) {
+      for (let check of checkBoxes) {
+        check.checked = false;
+        check.parentElement.parentElement.classList.remove("bg-snuff");
+      }
+    } else if (!allChecked) {
+      for (let check of checkBoxes) {
+        check.checked = true;
+        check.parentElement.parentElement.classList.add("bg-snuff");
+      }
+    }
     updateButtonState();
-    check.parentElement.parentElement.classList.toggle("bg-snuff");
   });
 }
-
-checkedButtn.addEventListener("click", () => {
-  const allChecked = Array.from(checkBoxes).every(
-    (checkbox) => checkbox.checked
-  );
-
-  const someChecked = Array.from(checkBoxes).some(
-    (checkbox) => checkbox.checked
-  );
-
-  if (allChecked || someChecked) {
-    for (let check of checkBoxes) {
-      check.checked = false;
-      check.parentElement.parentElement.classList.remove("bg-snuff");
-    }
-  } else if (!allChecked) {
-    for (let check of checkBoxes) {
-      check.checked = true;
-      check.parentElement.parentElement.classList.add("bg-snuff");
-    }
-  }
-  updateButtonState();
-});
-updateButtonState();
 
 function filtereUsers(filterType) {
   let filteredUsers;
