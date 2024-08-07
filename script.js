@@ -579,13 +579,16 @@ function deleteUser(userEl, userId) {
   addTaskToLocalStorage();
 }
 
+function showFilterDropDown() {
+  filterCrud.classList.toggle("hidden");
+}
+
 function addTaskToLocalStorage() {
   window.localStorage.setItem("users", JSON.stringify(users));
 }
 
-filter.addEventListener("click", (event) => {
-  filterCrud.classList.toggle("hidden");
-});
+filter.addEventListener("click", () => showFilterDropDown());
+filter.addEventListener("blur", () => showFilterDropDown());
 
 searchFiled.addEventListener("input", () => filtereUsers("searchUsers"));
 
