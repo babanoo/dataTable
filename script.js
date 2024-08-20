@@ -8,6 +8,11 @@ const filter = document.querySelector(".filter-btn");
 const filterCrud = document.querySelector(".filter-crud");
 const allUsers = document.querySelectorAll(".all-users");
 
+const sortByFirstName = document.querySelector(".first-name");
+const sortByLastName = document.querySelector(".last-name");
+const sortByDueDate = document.querySelector(".due-date");
+const sortByLastLogin = document.querySelector(".last-login");
+
 const activeUsers = document.querySelector(".active-users");
 const inactiveUsers = document.querySelector(".inactive-users");
 
@@ -35,7 +40,7 @@ const payableAmount = document.querySelector(".payable-amount");
 
 let currentUserId = null;
 
-let users = JSON.parse(localStorage.getItem("users")) || [
+let users = JSON.parse(localStorage.getItem("usersData")) || [
   {
     id: "u1",
     name: ["Justin Septimus", "example@email.com"],
@@ -198,6 +203,24 @@ function renderTable(users) {
     checkBox.classList.add("cursor-pointer", "check-box", "mb-5");
     contentRow.appendChild(td1);
 
+    let isChecked = checkBox.checked;
+
+    function updateCheckBoxState() {
+      if (isChecked) {
+        checkBox.checked = true;
+        checkBox.parentElement.parentElement.classList.add("bg-snuff");
+      } else {
+        checkBox.checked = false;
+        checkBox.parentElement.parentElement.classList.remove("bg-snuff");
+      }
+    }
+
+    checkBox.addEventListener("change", () => {
+      updateButtonState();
+      checkBox.parentElement.parentElement.classList.toggle("bg-snuff");
+      isChecked = checkBox.checked;
+    });
+
     const td2 = document.createElement("td");
     td2.classList.add("cell-padding");
     const dropDownBttn = document.createElement("button");
@@ -355,6 +378,8 @@ function renderTable(users) {
       }
       numberInput.value = parseFloat(user.amount[0].replace("$", ""));
       currentUserId = user.id;
+
+      updateCheckBoxState();
     });
 
     const amounts = users.map((user) =>
@@ -481,13 +506,6 @@ function renderTable(users) {
     }
   }
 
-  for (let check of checkBoxes) {
-    check.addEventListener("change", () => {
-      updateButtonState();
-      check.parentElement.parentElement.classList.toggle("bg-snuff");
-    });
-  }
-
   checkedButtn.addEventListener("click", () => {
     const allChecked = Array.from(checkBoxes).every(
       (checkbox) => checkbox.checked
@@ -584,11 +602,70 @@ function showFilterDropDown() {
 }
 
 function addTaskToLocalStorage() {
-  window.localStorage.setItem("users", JSON.stringify(users));
+  window.localStorage.setItem("usersData", JSON.stringify(users));
 }
 
 filter.addEventListener("click", () => showFilterDropDown());
-filter.addEventListener("blur", () => showFilterDropDown());
+
+sortByFirstName.addEventListener("click", () => {
+  users.sort(function (a, b) {
+    let firstNameA = a.name[0].split(" ")[0].toLowerCase();
+    let firstNameB = b.name[0].split(" ")[0].toLowerCase();
+    if (firstNameA < firstNameB) {
+      return -1;
+    }
+    if (firstNameA > firstNameB) {
+      return 1;
+    }
+    return 0;
+  });
+  renderTable(users);
+});
+
+sortByLastName.addEventListener("click", () => {
+  users.sort(function (a, b) {
+    let lastNameA = a.name[0].split(" ").slice(-1)[0].toLowerCase();
+    let lastNameB = b.name[0].split(" ").slice(-1)[0].toLowerCase();
+    if (lastNameA < lastNameB) {
+      return -1;
+    }
+    if (lastNameA > lastNameB) {
+      return 1;
+    }
+    return 0;
+  });
+  renderTable(users);
+});
+
+sortByDueDate.addEventListener("click", () => {
+  users.sort(function (a, b) {
+    let dateStrA = a["payment status"][1].split(" ").slice(-1)[0];
+    let dateStrB = b["payment status"][1].split(" ").slice(-1)[0];
+
+    let dateA = new Date(dateStrA.replace(/(\d+)\/(\w+)\/(\d+)/, "$2 $1, $3"));
+    let dateB = new Date(dateStrB.replace(/(\d+)\/(\w+)\/(\d+)/, "$2 $1, $3"));
+
+    return dateA - dateB;
+  });
+  renderTable(users);
+});
+
+sortByLastLogin.addEventListener("click", () => {
+  users.sort(function (a, b) {
+    let loginStrA = a["user status"][1].split(" ").slice(-1)[0];
+    let loginStrB = b["user status"][1].split(" ").slice(-1)[0];
+
+    let loginA = new Date(
+      loginStrA.replace(/(\d+)\/(\w+)\/(\d+)/, "$2 $1, $3")
+    );
+    let loginB = new Date(
+      loginStrB.replace(/(\d+)\/(\w+)\/(\d+)/, "$2 $1, $3")
+    );
+
+    return loginA - loginB;
+  });
+  renderTable(users);
+});
 
 searchFiled.addEventListener("input", () => filtereUsers("searchUsers"));
 
