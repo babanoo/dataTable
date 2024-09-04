@@ -38,6 +38,8 @@ const modalInputs = document.querySelectorAll(".modal-input");
 
 const payableAmount = document.querySelector(".payable-amount");
 
+const rowsPerPage = document.querySelector(".select-num-page");
+
 let currentUserId = null;
 
 let users = JSON.parse(localStorage.getItem("usersData")) || [
@@ -746,4 +748,8 @@ updateUser.addEventListener("click", (event) => {
 closeModal.addEventListener("click", () => {
   modal.close();
   removeOverflow();
+});
+
+rowsPerPage.addEventListener("click", () => {
+  users.slice(2, 6);
 });
