@@ -1,6 +1,6 @@
 import { users } from "./users.js";
 
-const table = document.querySelector(".table-container");
+table = document.querySelector(".table-container");
 
 const paid = document.querySelector(".paid");
 const unpaid = document.querySelector(".unpaid");
